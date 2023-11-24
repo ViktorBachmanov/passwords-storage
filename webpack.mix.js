@@ -11,7 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+// mix.js('resources/js/app.js', 'public/js')
+//     .postCss('resources/css/app.css', 'public/css', [
+//         //
+//     ]);
+
+mix.js('resources/vue/test-vue-app.js', 'public/js')
+   .vue();
+  //  .copy('node_modules/@mdi/font/fonts/', 'dist/fonts/');
