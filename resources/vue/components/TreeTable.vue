@@ -1,5 +1,14 @@
 <script setup>
+import { ref } from 'vue'
+
 import TreeTableRow from './TreeTableRow.vue'
+import PasswordCreatingDialog from './PasswordCreatingDialog.vue'
+
+
+const passwordCreatingDialog = ref(null)
+function openPasswordCreatingDialog() {
+  passwordCreatingDialog.value.handleOpen()
+}
 </script>
 
 
@@ -7,7 +16,9 @@ import TreeTableRow from './TreeTableRow.vue'
   <v-table>
     <thead>
       <tr>
-        <th>Item</th>
+        <th>
+          <v-btn icon="mdi-file-settings" @click="openPasswordCreatingDialog"></v-btn>
+        </th>
         <th>Access for user</th>
       </tr>
     </thead>
@@ -16,4 +27,6 @@ import TreeTableRow from './TreeTableRow.vue'
       <TreeTableRow />
     </tbody>
   </v-table>
+
+  <PasswordCreatingDialog ref="passwordCreatingDialog" />
 </template>
