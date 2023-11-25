@@ -1,3 +1,6 @@
 {
-    "/js/login-app-vue.js": "/js/login-app-vue.js"
+    "/js/login-app-vue.js": "/js/login-app-vue.js?id=54a37af7f76d24d66dd720122f6a59a3",
+    "/js/passwords-storage-app-vue.js": "/js/passwords-storage-app-vue.js?id=60ac5857cc503380afe5acc73ef2d2cf",
+    "/js/manifest.js": "/js/manifest.js?id=6606360942c57de3c95a7524f8c7ddb6",
+    "/js/vendor.js": "/js/vendor.js?id=dab3e27658f65cf94cbba807e1af45c9"
 }

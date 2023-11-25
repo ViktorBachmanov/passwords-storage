@@ -13,10 +13,13 @@
         <!-- Styles -->
         <style>       
         </style>
+
+        <script src="{{ mix('/js/manifest.js') }}"></script>
+        <script src="{{ mix('/js/vendor.js') }}"></script>
     </head>
 
     <body>
       <div id="passwords-storage-app-vue"></div>
-      <script src="/js/passwords-storage-app-vue.js"></script>
+      <script src="{{ mix('/js/passwords-storage-app-vue.js') }}"></script>
     </body>
 </html>
