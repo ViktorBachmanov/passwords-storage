@@ -1,6 +1,9 @@
 <script setup>
 import axios from 'axios'
 
+import TreeTable from './components/TreeTable.vue'
+
+
 async function handleLogout() {
   await axios.post('/logout')
 
@@ -10,19 +13,20 @@ async function handleLogout() {
 
 
 <template>
-  <v-card class="mx-auto" max-width="448">
-    <v-layout>
-      <v-app-bar color="primary" density="compact">
-        <template v-slot:append>
-          <v-btn icon="mdi-logout" @click="handleLogout"></v-btn>
-        </template>
-      </v-app-bar>
+  <!-- <v-card class="mx-auto" max-width="448"> -->
+  <v-layout>
+    <v-app-bar color="primary" density="compact">
+      <template v-slot:append>
+        <v-btn icon="mdi-logout" @click="handleLogout"></v-btn>
+      </template>
+    </v-app-bar>
 
-      <!-- <v-main>
-        <v-container fluid>
+    <v-main>
+      <v-container fluid class="mt-10">
+        <TreeTable />
+      </v-container>
+    </v-main>
 
-        </v-container>
-      </v-main> -->
-    </v-layout>
-  </v-card>
+  </v-layout>
+  <!-- </v-card> -->
 </template>
