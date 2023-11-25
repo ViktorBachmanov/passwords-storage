@@ -5,7 +5,7 @@ import TreeTable from './components/TreeTable.vue'
 
 
 async function handleLogout() {
-  await axios.post('/logout')
+  await axios.post('/api/logout')
 
   window.location.reload(true)
 }
