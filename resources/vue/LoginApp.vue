@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 
-async function login(credentials, node) {
+async function handleLogin(credentials, node) {
   try {
     const res = await axios.post('/login', credentials)
 
@@ -16,7 +16,7 @@ async function login(credentials, node) {
 </script>
 
 <template>
-  <FormKit type="form" submit-label="Login" @submit="login">
+  <FormKit type="form" submit-label="Login" @submit="handleLogin">
     <FormKit name="email" label="Email address" validation="required|email" />
     <FormKit type="password" name="password" label="Password" validation="required" />
   </FormKit>

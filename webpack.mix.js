@@ -21,4 +21,4 @@ mix.js('resources/vue/login-app-vue.js', 'public/js')
     .extract(["vue", "pinia"])
    .vue()
    .version();
-  //  .copy('node_modules/@mdi/font/fonts/', 'dist/fonts/');
+  //  .copy('node_modules/@mdi/font/fonts/', 'public/dist/fonts/');
