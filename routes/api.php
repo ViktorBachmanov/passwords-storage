@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +18,3 @@ use App\Http\Controllers\PasswordController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
-Route::post('/passwords', [PasswordController::class, 'store'])->middleware('auth:sanctum');

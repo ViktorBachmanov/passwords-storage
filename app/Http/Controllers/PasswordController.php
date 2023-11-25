@@ -21,7 +21,7 @@ class PasswordController extends Controller
       Password::create([
         'name' => $validated['name'],
         'value' => Hash::make($validated['value']),
-      ])
+      ]);
     }
 
     /**

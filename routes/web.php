@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PasswordController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,3 +28,5 @@ Route::get('/passwords-storage', function () {
 Route::get('/login', function () {
   return view('login');
 })->name('login');
+
+Route::post('/passwords', [PasswordController::class, 'store'])->middleware('auth');

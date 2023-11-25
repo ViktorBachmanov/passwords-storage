@@ -4,7 +4,7 @@ import axios from 'axios'
 
 async function handleLogin(credentials, node) {
   try {
-    const res = await axios.post('/api/login', credentials)
+    const res = await axios.post('/login', credentials)
 
     window.location.replace('/passwords-storage')
   } catch (error) {
