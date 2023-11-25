@@ -16,8 +16,8 @@
     </head>
 
     <body>
-      <h2>Login</h2>
+      <!-- <h2>Login</h2> -->
       <div id="login-app-vue"></div>
-      <!-- <script src="/js/login-app-vue.js"></script> -->
+      <script src="/js/login-app-vue.js"></script>
     </body>
 </html>

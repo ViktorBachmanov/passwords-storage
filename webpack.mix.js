@@ -16,6 +16,6 @@ const mix = require('laravel-mix');
 //         //
 //     ]);
 
-mix.js('resources/vue/test-vue-app.js', 'public/js')
+mix.js('resources/vue/login-app-vue.js', 'public/js')
    .vue();
   //  .copy('node_modules/@mdi/font/fonts/', 'dist/fonts/');
