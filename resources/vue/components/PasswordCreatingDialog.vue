@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
 
 const isOpen = ref(false)
 
@@ -28,6 +29,10 @@ function handleGenerate() {
 
   value.value = val;
 }
+
+async function handleSubmit() {
+  await axios.post('/api/passwords')
+}
 </script>
 
 
@@ -37,7 +42,7 @@ function handleGenerate() {
       <!-- <v-card> -->
       <h3>Password</h3>
       <v-sheet width="300" class="mx-auto">
-        <v-form @submit.prevent="handleClose">
+        <v-form @submit.prevent="handleSubmit">
           <v-text-field v-model="name" label="Name"></v-text-field>
           <v-text-field v-model="value" label="Value"></v-text-field>
           <v-btn block class="mt-2" @click="handleGenerate">Generate</v-btn>
