@@ -14,21 +14,38 @@ function handleClose() {
 defineExpose({
   handleOpen,
 })
+
+const name = ref('')
+const value = ref('')
+
+function handleGenerate() {
+  const length = 8
+  const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*"
+  let val = ""
+  for (let i = 0, n = charset.length; i < length; ++i) {
+    val += charset.charAt(Math.floor(Math.random() * n));
+  }
+
+  value.value = val;
+}
 </script>
 
 
 <template>
   <div class="text-center">
     <v-dialog v-model="isOpen" width="auto">
-      <v-card>
-        <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" block @click="handleClose">Close Dialog</v-btn>
-        </v-card-actions>
-      </v-card>
+      <!-- <v-card> -->
+      <h3>Password</h3>
+      <v-sheet width="300" class="mx-auto">
+        <v-form @submit.prevent="handleClose">
+          <v-text-field v-model="name" label="Name"></v-text-field>
+          <v-text-field v-model="value" label="Value"></v-text-field>
+          <v-btn block class="mt-2" @click="handleGenerate">Generate</v-btn>
+          <v-btn type="submit" class="mt-2">Create</v-btn>
+          <v-btn class="mt-2" @click="handleClose">Cancel</v-btn>
+        </v-form>
+        <!-- </v-card> -->
+      </v-sheet>
     </v-dialog>
   </div>
 </template>
