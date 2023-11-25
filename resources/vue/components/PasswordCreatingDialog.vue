@@ -31,7 +31,10 @@ function handleGenerate() {
 }
 
 async function handleSubmit() {
-  await axios.post('/api/passwords')
+  await axios.post('/api/passwords', {
+    name: name.value,
+    value: value.value
+  })
 }
 </script>
 
