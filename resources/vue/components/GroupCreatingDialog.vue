@@ -15,7 +15,6 @@ function handleOpen() {
 
 function handleClose() {
   isOpen.value = false
-  reset()
 }
 
 defineExpose({
@@ -23,17 +22,21 @@ defineExpose({
 })
 
 
-const name = ref('')
+async function handleSubmit(data, node) {
+  // await new Promise((r) => setTimeout(r, 1000))
+  try {
+    await axios.post('/pw-storage/groups', data)
+    handleClose()
 
-function reset() {
-  name.value = ''
-}
-
-async function handleSubmit() {
-  await new Promise((r) => setTimeout(r, 1000))
-  // await axios.post('/groups', {
-  //   name: name.value,
-  // })
+  } catch (error) {
+    node.setErrors(
+      ['Error'],
+      error.response.data.errors
+      // {
+      //   name: 'is required'
+      // }
+    )
+  }
 }
 </script>
 

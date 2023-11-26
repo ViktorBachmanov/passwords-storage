@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\GroupController;
 
 
 /*
@@ -30,3 +31,14 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/passwords', [PasswordController::class, 'store'])->middleware('auth');
+
+
+const PREFIX = 'pw-storage';
+
+Route::middleware(['auth'])->group(function () {
+  Route::prefix(PREFIX)->group(function () {
+    Route::name(PREFIX . '.')->group(function () {
+      Route::post('/groups', [GroupController::class, 'store'])->name('store-group');
+    });
+  });
+});
