@@ -1,9 +1,13 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
 
 import TreeTableRow from './TreeTableRow.vue'
 import GroupCreatingDialog from './GroupCreatingDialog.vue'
 import PasswordCreatingDialog from './PasswordCreatingDialog.vue'
+
+
+const tree = await axios.get('/pw-storage/tree')
 
 
 const groupCreatingDialog = ref(null)

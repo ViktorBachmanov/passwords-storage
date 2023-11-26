@@ -33,7 +33,9 @@ async function handleLogout() {
 
     <v-main>
       <v-container fluid class="mt-10">
-        <TreeTable />
+        <Suspense>
+          <TreeTable />
+        </Suspense>
       </v-container>
     </v-main>
 

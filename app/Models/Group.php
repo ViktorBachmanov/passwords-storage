@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\User;
+
+
 class Group extends Model
 {
     use HasFactory;
@@ -15,4 +18,12 @@ class Group extends Model
      * @var array
      */
     protected $fillable = ['name'];
+
+
+    public static function getAccessibleGroups(User $user)
+    {
+      if ($user->is_admin) {
+        return self::all();
+      }
+    }
 }

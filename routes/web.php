@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\TreeController;
 
 
 /*
@@ -39,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
   Route::prefix(PREFIX)->group(function () {
     Route::name(PREFIX . '.')->group(function () {
       Route::post('/groups', [GroupController::class, 'store'])->name('store-group');
+      Route::get('/tree', [TreeController::class, 'index'])->name('get-tree');
     });
   });
 });
