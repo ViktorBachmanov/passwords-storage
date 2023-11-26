@@ -1,6 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import axios from 'axios'
+import { useTreeStore } from '../stores/tree-store.js'
+import { useTheme } from 'vuetify'
+
+
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
+
+const treeStore = useTreeStore()
+
 
 const isOpen = ref(false)
 
@@ -10,24 +19,13 @@ function handleOpen() {
 
 function handleClose() {
   isOpen.value = false
-  reset()
 }
 
 defineExpose({
   handleOpen,
 })
 
-const rootFolderId = '1'
-
-const name = ref('')
 const value = ref('')
-const group_id = ref(rootFolderId)
-
-function reset() {
-  name.value = ''
-  value.value = ''
-  group_id.value = rootFolderId
-}
 
 function handleGenerate() {
   const length = 8
@@ -40,12 +38,17 @@ function handleGenerate() {
   value.value = val;
 }
 
-async function handleSubmit() {
-  await axios.post('/passwords', {
-    name: name.value,
-    value: value.value,
-    group_id: group_id.value
-  })
+async function handleSubmit(data, node) {
+  try {
+    await axios.post('/pw-storage/passwords', data)
+    handleClose()
+    treeStore.fetchTree()
+  } catch (error) {
+    node.setErrors(
+      ['Error'],
+      error.response.data.errors
+    )
+  }
 }
 </script>
 
@@ -53,17 +56,16 @@ async function handleSubmit() {
 <template>
   <div class="text-center">
     <v-dialog v-model="isOpen" width="auto">
-      <!-- <v-card> -->
       <h3>Password</h3>
       <v-sheet width="300" class="mx-auto">
-        <v-form @submit.prevent="handleSubmit">
-          <v-text-field v-model="name" label="Name"></v-text-field>
-          <v-text-field v-model="value" label="Value"></v-text-field>
-          <v-btn block class="mt-2" @click="handleGenerate">Generate</v-btn>
-          <v-btn type="submit" class="mt-2">Create</v-btn>
-          <v-btn class="mt-2" @click="handleClose">Cancel</v-btn>
-        </v-form>
-        <!-- </v-card> -->
+        <FormKit type="form" submit-label="Save" @submit="handleSubmit" style="margin: 1em">
+          <FormKit type="select" label="Group" name="group_id" :options="treeStore.groupValueLabelArr"
+            :input-class="{ dark: isDark }" />
+          <FormKit name="name" label="Name" validation="required" :input-class="{ dark: isDark }" />
+          <FormKit name="value" label="Value" v-model="value" validation="required" :input-class="{ dark: isDark }" />
+          <FormKit type="button" label="Generate" @click="handleGenerate" />
+          <FormKit type="button" label="Cancel" @click="handleClose" />
+        </FormKit>
       </v-sheet>
     </v-dialog>
   </div>

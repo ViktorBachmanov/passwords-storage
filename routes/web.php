@@ -31,12 +31,10 @@ Route::get('/login', function () {
   return view('login');
 })->name('login');
 
-Route::post('/passwords', [PasswordController::class, 'store'])->middleware('auth');
-
-
 
 Route::middleware(['auth'])->group(function () {
-  Route::prefix('pw-storage')->group(function () {    
+  Route::prefix('pw-storage')->group(function () { 
+    Route::post('/passwords', [PasswordController::class, 'store']);
     Route::post('/groups', [GroupController::class, 'store']);
     Route::get('/tree', [GroupController::class, 'index']);  
   });

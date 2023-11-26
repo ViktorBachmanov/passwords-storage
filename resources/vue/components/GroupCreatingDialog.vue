@@ -23,18 +23,14 @@ defineExpose({
 
 
 async function handleSubmit(data, node) {
-  // await new Promise((r) => setTimeout(r, 1000))
   try {
     await axios.post('/pw-storage/groups', data)
     handleClose()
-
+    treeStore.fetchTree()
   } catch (error) {
     node.setErrors(
       ['Error'],
       error.response.data.errors
-      // {
-      //   name: 'is required'
-      // }
     )
   }
 }
@@ -58,5 +54,6 @@ async function handleSubmit(data, node) {
 <style>
 .dark {
   color: white;
+  background-color: rgb(41, 37, 37);
 }
 </style>
