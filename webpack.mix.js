@@ -18,7 +18,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/vue/login-app-vue.js', 'public/js')
     .js('resources/vue/passwords-storage-app-vue', 'public/js')
-    .extract(["vue", "pinia"])
+    .extract(["vue", "pinia", "vuetify", "formkit"])
    .vue()
    .version();
   //  .copy('node_modules/@mdi/font/fonts/', 'public/dist/fonts/');

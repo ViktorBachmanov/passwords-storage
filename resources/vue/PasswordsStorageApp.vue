@@ -1,7 +1,16 @@
 <script setup>
 import axios from 'axios'
+import { useTheme } from 'vuetify'
+
 
 import TreeTable from './components/TreeTable.vue'
+
+
+const theme = useTheme()
+
+function toggleTheme() {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
 
 
 async function handleLogout() {
@@ -17,6 +26,7 @@ async function handleLogout() {
   <v-layout>
     <v-app-bar color="primary" density="compact">
       <template v-slot:append>
+        <v-btn icon="mdi-brightness-4" @click="toggleTheme"></v-btn>
         <v-btn icon="mdi-logout" @click="handleLogout"></v-btn>
       </template>
     </v-app-bar>
