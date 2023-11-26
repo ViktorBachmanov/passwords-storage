@@ -5,10 +5,11 @@ import axios from 'axios'
 import TreeTableRow from './TreeTableRow.vue'
 import GroupCreatingDialog from './GroupCreatingDialog.vue'
 import PasswordCreatingDialog from './PasswordCreatingDialog.vue'
+import { useTreeStore } from '../stores/tree-store.js'
 
 
-const tree = await axios.get('/pw-storage/tree')
-
+const treeStore = useTreeStore()
+await treeStore.fetchTree();
 
 const groupCreatingDialog = ref(null)
 function openGroupCreatingDialog() {
@@ -35,7 +36,8 @@ function openPasswordCreatingDialog() {
     </thead>
 
     <tbody>
-      <TreeTableRow />
+      <TreeTableRow v-for="group in treeStore.groups" :key="group.id" :label="group.name" :id="group.id" />
+      <TreeTableRow v-for="password in treeStore.passwords" :key="password.id" :label="password.name" :id="password.id" />
     </tbody>
   </v-table>
 
