@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import { plugin, defaultConfig } from '@formkit/vue'
 import '@formkit/themes/genesis'
+import { createPinia } from 'pinia'
 
 import PasswordsStorageApp from "./PasswordsStorageApp.vue";
 
@@ -20,6 +21,10 @@ const vuetify = createVuetify({
   }
 })
 
+const pinia = createPinia()
 
-
-createApp(PasswordsStorageApp).use(vuetify).use(plugin, defaultConfig).mount("#passwords-storage-app-vue");
+createApp(PasswordsStorageApp)
+  .use(vuetify)
+  .use(plugin, defaultConfig)
+  .use(pinia)
+  .mount("#passwords-storage-app-vue");

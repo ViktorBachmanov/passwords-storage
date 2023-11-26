@@ -34,13 +34,10 @@ Route::get('/login', function () {
 Route::post('/passwords', [PasswordController::class, 'store'])->middleware('auth');
 
 
-const PREFIX = 'pw-storage';
 
 Route::middleware(['auth'])->group(function () {
-  Route::prefix(PREFIX)->group(function () {
-    Route::name(PREFIX . '.')->group(function () {
-      Route::post('/groups', [GroupController::class, 'store'])->name('store-group');
-      Route::get('/tree', [TreeController::class, 'index'])->name('get-tree');
-    });
+  Route::prefix('pw-storage')->group(function () {    
+    Route::post('/groups', [GroupController::class, 'store']);
+    Route::get('/tree', [TreeController::class, 'index']);  
   });
 });
