@@ -42,3 +42,12 @@ async function handleLogout() {
   </v-layout>
   <!-- </v-card> -->
 </template>
+
+
+
+<style>
+.dark {
+  color: white;
+  background-color: rgb(41, 37, 37);
+}
+</style>

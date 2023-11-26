@@ -50,10 +50,3 @@ async function handleSubmit(data, node) {
   </div>
 </template>
 
-
-<style>
-.dark {
-  color: white;
-  background-color: rgb(41, 37, 37);
-}
-</style>

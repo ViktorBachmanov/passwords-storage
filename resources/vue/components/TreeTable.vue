@@ -43,8 +43,18 @@ function openPasswordCreatingDialog() {
         </th>
         <th>
           Access for
-          <FormKit type="select" label="User" name="user_id" v-model="treeStore.accessForUserId"
-            :options="treeStore.accessForUserIdNameArr" :input-class="{ dark: isDark }" />
+          <!-- <FormKit type="select" label="User" name="user_id" v-model="treeStore.accessForUserId"
+            :options="treeStore.accessForUserIdNameArr" :input-class="{ dark: isDark }"
+             /> -->
+          <!-- <FormKit type="select" label="User" name="user_id" v-model="treeStore.accessForUserId"
+            :input-class="{ dark: isDark }" :class="{ dark: isDark }">
+            <option value="" disabled :class="{ dark: isDark }">Select a user</option>
+            <option v-for="option in treeStore.accessForUserIdNameArr" :key="option.value" :value="option.value"
+              :option-class="{ dark: isDark }">{{
+                option.label }}</option>
+          </FormKit> -->
+          <v-select label="User" :items="treeStore.accessForUserIdNameArr" item-title="label" item-value="value"
+            v-model="treeStore.accessForUserId"></v-select>
         </th>
       </tr>
     </thead>
