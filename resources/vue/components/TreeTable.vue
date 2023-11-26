@@ -1,15 +1,25 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 // import axios from 'axios'
 
 import TreeTableRow from './TreeTableRow.vue'
 import GroupCreatingDialog from './GroupCreatingDialog.vue'
 import PasswordCreatingDialog from './PasswordCreatingDialog.vue'
 import { useTreeStore } from '../stores/tree-store.js'
+import { useTheme } from 'vuetify'
+
+
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
 
 
 const treeStore = useTreeStore()
 await treeStore.fetchTree();
+
+
+watch(() => treeStore.accessForUserId, () => {
+  treeStore.fetchTree();
+})
 
 const groupCreatingDialog = ref(null)
 function openGroupCreatingDialog() {
@@ -31,7 +41,11 @@ function openPasswordCreatingDialog() {
           <v-btn icon="mdi-folder-plus" @click="openGroupCreatingDialog"></v-btn>
           <v-btn icon="mdi-file-settings" @click="openPasswordCreatingDialog"></v-btn>
         </th>
-        <th>Access for user</th>
+        <th>
+          Access for
+          <FormKit type="select" label="User" name="user_id" v-model="treeStore.accessForUserId"
+            :options="treeStore.accessForUserIdNameArr" :input-class="{ dark: isDark }" />
+        </th>
       </tr>
     </thead>
 

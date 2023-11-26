@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\StoreGroupRequest;
-use App\Http\Resources\GroupResource;
+// use App\Http\Resources\GroupResource;
 use App\Models\Group;
 
 
 class GroupController extends Controller
 {
-    public function index()
-    {
-      return GroupResource::collection(Group::getAccessibleGroups(Auth::user()));
-    }
+    // public function index()
+    // {
+    //   return GroupResource::collection(Group::getAccessibleGroups(Auth::user()));
+    // }
 
     /**
      * Store a newly created resource in storage.
