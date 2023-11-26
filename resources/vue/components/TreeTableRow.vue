@@ -7,10 +7,12 @@ defineProps({
 
 
 <template>
-  <tr v-if="id !== 1">
+  <tr>
     <td>{{ label }}</td>
     <td>
       <input type="checkbox">
     </td>
   </tr>
+
+  <slot></slot>
 </template>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
+// import axios from 'axios'
 
 import TreeTableRow from './TreeTableRow.vue'
 import GroupCreatingDialog from './GroupCreatingDialog.vue'
@@ -36,8 +36,12 @@ function openPasswordCreatingDialog() {
     </thead>
 
     <tbody>
-      <TreeTableRow v-for="group in treeStore.groups" :key="group.id" :label="group.name" :id="group.id" />
-      <TreeTableRow v-for="password in treeStore.passwords" :key="password.id" :label="password.name" :id="password.id" />
+      <TreeTableRow v-for="group in treeStore.groups" :key="group.id" :label="group.name" :id="group.id">
+        <TreeTableRow v-for="password in group.passwords" :key="password.id" :label="password.name" :id="password.id" />
+      </TreeTableRow>
+
+      <TreeTableRow v-for="password in treeStore.rootGroup.passwords" :key="password.id" :label="password.name"
+        :id="password.id" />
     </tbody>
   </v-table>
 

@@ -5,14 +5,16 @@ import axios from 'axios'
 
 export const useTreeStore = defineStore('tree-store', () => {
   const groups = ref([])
-  const passwords = ref([])
+  const rootGroup = ref([])
 
   async function fetchTree() {
     try {
       const response = await axios.get('/pw-storage/tree')
-      // console.log(response)
-      groups.value = response.data.groups
-      passwords.value = response.data.passwords
+      // console.log('response.data: ', response.data)
+      groups.value = response.data
+
+      const rootGroupIndex = groups.value.findIndex(group => group.id === 1)
+      rootGroup.value = groups.value.splice(rootGroupIndex, 1)[0]
     } catch (error) {
       console.log('tree-store error: ', error)
     }    
@@ -21,7 +23,7 @@ export const useTreeStore = defineStore('tree-store', () => {
 
   return { 
     groups, 
-    passwords,
+    rootGroup,
     fetchTree 
   }
 })
