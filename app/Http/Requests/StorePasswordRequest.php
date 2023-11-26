@@ -24,7 +24,8 @@ class StorePasswordRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'value' => 'required|min:8'
+            'value' => 'required|min:8',
+            'group_id' => 'required'
         ];
     }
 }

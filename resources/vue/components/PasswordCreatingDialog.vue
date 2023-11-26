@@ -10,14 +10,24 @@ function handleOpen() {
 
 function handleClose() {
   isOpen.value = false
+  reset()
 }
 
 defineExpose({
   handleOpen,
 })
 
+const rootFolderId = '1'
+
 const name = ref('')
 const value = ref('')
+const group_id = ref(rootFolderId)
+
+function reset() {
+  name.value = ''
+  value.value = ''
+  group_id.value = rootFolderId
+}
 
 function handleGenerate() {
   const length = 8
@@ -33,7 +43,8 @@ function handleGenerate() {
 async function handleSubmit() {
   await axios.post('/passwords', {
     name: name.value,
-    value: value.value
+    value: value.value,
+    group_id: group_id.value
   })
 }
 </script>

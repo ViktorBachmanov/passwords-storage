@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\StorePasswordRequest;
 use App\Models\Password;
@@ -21,6 +22,8 @@ class PasswordController extends Controller
       Password::create([
         'name' => $validated['name'],
         'value' => Hash::make($validated['value']),
+        'creator_id' => Auth::id(),
+        'group_id' => $validated['group_id'],
       ]);
     }
 

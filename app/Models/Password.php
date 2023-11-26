@@ -14,5 +14,5 @@ class Password extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'value'];
+    protected $fillable = ['name', 'value', 'creator_id', 'group_id'];
 }
