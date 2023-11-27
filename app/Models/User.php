@@ -55,7 +55,15 @@ class User extends Authenticatable
     {
         return $this->morphedByMany(Password::class, 'accessable')->withPivot('access');
     }
-    
+
+    /**
+     * Get all of the groupss for the user.
+     */
+    public function groups_accesses(): MorphToMany
+    {
+        return $this->morphedByMany(Group::class, 'accessable')->withPivot('access');
+    }
+
 
     public function toggleAccess(string $itemType, int $itemId, int|null $currentAccess): void
     {

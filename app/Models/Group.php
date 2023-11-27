@@ -25,5 +25,7 @@ class Group extends Model
       if ($user->is_admin) {
         return self::all();
       }
+
+      
     }
 }
