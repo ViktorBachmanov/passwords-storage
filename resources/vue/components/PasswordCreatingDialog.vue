@@ -10,22 +10,27 @@ const isDark = computed(() => theme.global.current.value.dark)
 
 const treeStore = useTreeStore()
 
-
 const isOpen = ref(false)
+
+const value = ref('')
 
 function handleOpen() {
   isOpen.value = true
+  reset();
 }
 
 function handleClose() {
   isOpen.value = false
 }
 
+function reset() {
+  value.value = ''
+}
+
 defineExpose({
   handleOpen,
 })
 
-const value = ref('')
 
 function handleGenerate() {
   const length = 8
