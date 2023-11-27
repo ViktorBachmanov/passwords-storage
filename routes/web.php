@@ -29,7 +29,7 @@ const PREFIX = 'pw-storage';
 
 Route::get(PREFIX, function () {
   return view('passwords-storage');
-})->middleware('auth');
+});
 
 Route::get(PREFIX . '/users', function () {
   return User::all()->map(fn ($user) => [

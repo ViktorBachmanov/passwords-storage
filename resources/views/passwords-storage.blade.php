@@ -19,7 +19,8 @@
     </head>
 
     <body>
-      <div id="passwords-storage-app-vue" data-user-name="{{ Auth::user()->name }}"></div>
+      {{-- <div id="passwords-storage-app-vue" data-user-name="{{ Auth::user()->name }}"></div> --}}
+      <div id="passwords-storage-app-vue" data-user-name="{{ Auth::user()?->name }}"></div>
       <script src="{{ mix('/js/passwords-storage-app-vue.js') }}"></script>
     </body>
 </html>
