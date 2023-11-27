@@ -19,13 +19,4 @@ class Group extends Model
      */
     protected $fillable = ['name'];
 
-
-    public static function getAccessibleGroups(User $user)
-    {
-      if ($user->is_admin) {
-        return self::all();
-      }
-
-      
-    }
 }

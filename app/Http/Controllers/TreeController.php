@@ -16,7 +16,7 @@ class TreeController extends Controller
     public function index(Request $request)
     {
       return [
-        'groups' => GroupResource::collection(Group::getAccessibleGroups(Auth::user())),
+        'groups' => GroupResource::collection(Auth::user()->getAccessibleGroups()),
         'users' => User::where('is_admin', 0)->get(),
         'accessForUserId' => $request->input('access_for_user_id')
       ];

@@ -64,6 +64,15 @@ class User extends Authenticatable
         return $this->morphedByMany(Group::class, 'accessable')->withPivot('access');
     }
 
+    public function getAccessibleGroups()
+    {
+      if ($this->is_admin) {
+        return Group::all();
+      }
+
+        return $this->groups_accesses()->wherePivot('access', 1)->get();
+    }
+
 
     public function toggleAccess(string $itemType, int $itemId, int|null $currentAccess): void
     {
