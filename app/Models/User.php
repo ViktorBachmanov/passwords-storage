@@ -70,7 +70,10 @@ class User extends Authenticatable
         return Group::all();
       }
 
-        return $this->groups_accesses()->wherePivot('access', 1)->get();
+        $groups = $this->groups_accesses()->wherePivot('access', 1)->get();
+        $groups->push(Group::find(1));    // add the root_group
+
+        return $groups;
     }
 
 
