@@ -29,9 +29,12 @@ class GroupResource extends JsonResource
           'id' => $this->id,
           'name' => $this->name,
           'passwords' => PasswordResource::collection(Password::getGroupAccessiblePasswords($this->id, Auth::user())),
-          'access' => isset($groupAccess)
-            ? $groupAccess->pivot->access
-            : null
+          'access' => [
+             'value' => isset($groupAccess)
+                ? $groupAccess->pivot->access
+                : null,
+              'display' => Auth::user()->is_admin
+          ],
         ];
     }
 }

@@ -62,8 +62,7 @@ async function handleSubmit(data, node) {
           <FormKit type="select" label="Group" name="group_id" :options="treeStore.groupValueLabelArr"
             :input-class="{ dark: isDark }" />
           <FormKit name="name" label="Name" validation="required" :input-class="{ dark: isDark }" />
-          <FormKit name="value" label="Value" v-model="value" validation="required|min:8"
-            :input-class="{ dark: isDark }" />
+          <FormKit name="value" label="Value" v-model="value" validation="required" :input-class="{ dark: isDark }" />
           <FormKit type="button" label="Generate" @click="handleGenerate" />
           <FormKit type="button" label="Cancel" @click="handleClose" />
         </FormKit>

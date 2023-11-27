@@ -96,4 +96,10 @@ class User extends Authenticatable
             ['access' => $newAccess]
         );
     }
+
+    public function isCreatorOfPassword(int $passwordId): bool
+    {
+      return Password::find($passwordId)->creator_id === $this->id;
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 
@@ -26,10 +27,12 @@ class PasswordResource extends JsonResource
         return [
           'id' => $this->id,
           'name' => $this->name,
-          'access' => isset($passwordAccess)
-            ? $passwordAccess->pivot->access
-            // ? $passwordAccess
-            : null
+          'access' => [
+            'value' => isset($passwordAccess)
+               ? $passwordAccess->pivot->access
+               : null,
+             'display' => Auth::user()->is_admin || Auth::user()->isCreatorOfPassword($this->id)
+          ],
         ];
     }
 }
