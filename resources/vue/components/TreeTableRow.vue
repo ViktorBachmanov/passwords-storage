@@ -35,5 +35,6 @@ function openAccessToggleDialog() {
 
   <slot></slot>
 
-  <AccessToggleDialog ref="accessToggleDialog" :currentAccess="access.value" :itemId="id" :itemType="type" />
+  <AccessToggleDialog ref="accessToggleDialog" :currentAccess="access.value" :itemId="id" :itemType="type"
+    :itemName="label" />
 </template>

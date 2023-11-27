@@ -8,6 +8,7 @@ const props = defineProps({
   currentAccess: Number,
   itemType: String, // password | group
   itemId: Number,
+  itemName: String,
 })
 
 
@@ -59,7 +60,8 @@ async function handleSubmit() {
     <v-dialog v-model="isOpen" width="auto">
       <h3>Access</h3>
       <v-sheet width="300" class="mx-auto">
-        {{ currentAccess ? 'Запретить' : 'Разрешить' }} доступ к {{ itemType == 'password' ? 'паролю' : 'группе' }}
+        {{ currentAccess ? 'Запретить' : 'Разрешить' }} доступ к {{ itemType == 'password' ? 'паролю' : 'группе' }} {{
+          itemName }}
         пользователю {{ treeStore.accessableUserName }}
       </v-sheet>
 
