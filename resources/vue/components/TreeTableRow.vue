@@ -5,6 +5,7 @@ import { useTreeStore } from '../stores/tree-store.js'
 import AccessToggleDialog from './AccessToggleDialog.vue'
 // const AccessToggleDialog = defineAsyncComponent(() => import('./AccessToggleDialog.vue'))
 import PasswordShowDialog from './PasswordShowDialog.vue'
+import ArrowRight from './ArrowRight.vue'
 
 const props = defineProps({
   label: String,
@@ -40,14 +41,18 @@ const isSelected = computed(() => {
   return props.type === treeStore.selectedItem.type && props.id === treeStore.selectedItem.id
 })
 
+const showChildren = ref(true)
+
 </script>
 
 
 <template>
   <tr>
     <td @click="handleSelectItem" :class="{ selected: isSelected }">
-      <span :class="{ indent: indent }">
-        <v-btn icon="mdi-eye" v-if="type == 'password'" @click="openPasswordShowDialog"></v-btn>
+      <span :class="{ indent: indent }" style="display: flex; align-items: center;">
+        <ArrowRight v-if="type == 'group'" :down="showChildren" @click="showChildren = !showChildren" />
+        <v-btn v-else-if="type == 'password'" icon="mdi-eye" @click="openPasswordShowDialog" size="x-small"
+          style="margin-right: 0.5em"></v-btn>
         {{ label }}
       </span>
     </td>
@@ -56,7 +61,7 @@ const isSelected = computed(() => {
     </td>
   </tr>
 
-  <slot></slot>
+  <slot v-if="showChildren"></slot>
 
   <AccessToggleDialog ref="accessToggleDialog" :currentAccess="access.value" :itemId="id" :itemType="type"
     :itemName="label" />
