@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Models\AccessUser;
 
 
 class Group extends Model
@@ -18,5 +20,18 @@ class Group extends Model
      * @var array
      */
     protected $fillable = ['name'];
+
+
+    protected static function booted(): void
+    {
+        static::created(function (Group $group) {
+          AccessUser::create([
+            'accessable_type' => 'App\Models\Group',
+            'accessable_id' => $group->id,
+            'user_id' => Auth::user()->id,
+            'access' => 1
+          ]);
+        });
+    }
 
 }

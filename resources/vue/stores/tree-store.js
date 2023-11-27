@@ -33,11 +33,7 @@ export const useTreeStore = defineStore('tree-store', () => {
           label: user.name,
         }
       })
-      // accessForUserIdNameArr.value.push({
-      //   value: '-1',
-      //   label: '',
-      // })
-
+  
       const rootGroupIndex = groups.value.findIndex(group => group.id === 1)
       rootGroup.value = groups.value.splice(rootGroupIndex, 1)[0]
     } catch (error) {

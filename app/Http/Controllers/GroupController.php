@@ -13,11 +13,6 @@ use App\Models\Group;
 
 class GroupController extends Controller
 {
-    // public function index()
-    // {
-    //   return GroupResource::collection(Group::getAccessibleGroups(Auth::user()));
-    // }
-
     /**
      * Store a newly created resource in storage.
      */

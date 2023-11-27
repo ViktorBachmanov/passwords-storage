@@ -12,4 +12,11 @@ class AccessUser extends MorphPivot
      * @var string
      */
     protected $table = 'accessables';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['accessable_type', 'accessable_id', 'user_id', 'access'];
 }

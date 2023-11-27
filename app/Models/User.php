@@ -64,15 +64,6 @@ class User extends Authenticatable
         return $this->morphedByMany(Group::class, 'accessable')->withPivot('access');
     }
 
-    // private function getAccessiblePasswords()
-    // {
-    //   if ($this->is_admin) {
-    //     return Password::all();
-    //   }
-
-    //     return $this->passwords_accesses()->wherePivot('access', 1)->get();
-    // }
-
     public function getAccessibleGroups()
     {
       if ($this->is_admin) {

@@ -36,5 +36,10 @@ class PwsUserSeeder extends Seeder
           ['name' => 'pws-user-2'],
           ['email' => 'pws-user-2@mail.ru', 'is_admin' => 0, 'password' => Hash::make('123')]
         );
+
+        User::firstOrCreate(
+          ['name' => 'pws-user-3'],
+          ['email' => 'pws-user-3@mail.ru', 'is_admin' => 0, 'password' => Hash::make('123')]
+        );
     }
 }

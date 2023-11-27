@@ -3,6 +3,8 @@ import { ref, computed } from 'vue'
 import axios from 'axios'
 import { useTheme } from 'vuetify'
 
+import { useTreeStore } from '../stores/tree-store.js'
+
 
 const theme = useTheme()
 const isDark = computed(() => theme.global.current.value.dark)
@@ -21,6 +23,7 @@ defineExpose({
   handleOpen,
 })
 
+const treeStore = useTreeStore()
 
 async function handleSubmit(data, node) {
   try {
