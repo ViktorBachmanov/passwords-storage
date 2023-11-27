@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 // import { useToast } from "vue-toast-notification";
@@ -50,14 +50,17 @@ export function useAuth() {
     }
 
     
-    // const isAuthenticated = computed(() => {
-    //     return user.value ? true : false;
-    // });
+    const isAuthenticated = computed(() => {
+        return user.value ? true : false;
+    });
+
+    const userName = computed(() => user.value?.name)
 
     
     return {
         logout,
         getUser,
-        // isAuthenticated,
+        userName,
+        isAuthenticated,
     };
 }

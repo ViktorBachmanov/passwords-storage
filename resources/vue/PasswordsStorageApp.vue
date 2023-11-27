@@ -1,16 +1,11 @@
 <script setup>
-import axios from 'axios'
+import { computed } from 'vue'
 import { useTheme } from 'vuetify'
 
 import { useAuth } from './composables/useAuth.js'
 
 
 // import TreeTable from './components/TreeTable.vue'
-
-
-defineProps({
-  userName: String,
-})
 
 
 const theme = useTheme()
@@ -27,6 +22,7 @@ async function handleLogout() {
 
   // window.location.reload(true)
 }
+
 </script>
 
 
@@ -34,10 +30,10 @@ async function handleLogout() {
   <!-- <v-card class="mx-auto" max-width="448"> -->
   <v-layout>
     <v-app-bar color="primary" density="compact">
-      <v-app-bar-title>Current user: {{ userName }}</v-app-bar-title>
+      <v-app-bar-title>Current user: {{ auth.userName }}</v-app-bar-title>
       <template v-slot:append>
         <v-btn icon="mdi-brightness-4" @click="toggleTheme"></v-btn>
-        <v-btn icon="mdi-logout" @click="handleLogout"></v-btn>
+        <v-btn v-if="auth.isAuthenticated" icon="mdi-logout" @click="handleLogout"></v-btn>
       </template>
     </v-app-bar>
 
