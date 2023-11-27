@@ -10,6 +10,10 @@ defineProps({
   id: Number,
   type: String,   // password | group
   access: Object,
+  indent: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const treeStore = useTreeStore()
@@ -27,7 +31,11 @@ function openAccessToggleDialog() {
 
 <template>
   <tr>
-    <td>{{ label }}</td>
+    <td>
+      <span :class="{ indent: indent }">
+        {{ label }}
+      </span>
+    </td>
     <td>
       <input type="checkbox" v-if="access.display" :checked="access.value" @click.prevent="openAccessToggleDialog">
     </td>
@@ -38,3 +46,10 @@ function openAccessToggleDialog() {
   <AccessToggleDialog ref="accessToggleDialog" :currentAccess="access.value" :itemId="id" :itemType="type"
     :itemName="label" />
 </template>
+
+
+<style scoped>
+.indent {
+  margin-left: 2em;
+}
+</style>
