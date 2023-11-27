@@ -2,8 +2,12 @@
 import axios from 'axios'
 import { useTheme } from 'vuetify'
 
-
 import TreeTable from './components/TreeTable.vue'
+
+
+defineProps({
+  userName: String,
+})
 
 
 const theme = useTheme()
@@ -25,6 +29,7 @@ async function handleLogout() {
   <!-- <v-card class="mx-auto" max-width="448"> -->
   <v-layout>
     <v-app-bar color="primary" density="compact">
+      <v-app-bar-title>Current user: {{ userName }}</v-app-bar-title>
       <template v-slot:append>
         <v-btn icon="mdi-brightness-4" @click="toggleTheme"></v-btn>
         <v-btn icon="mdi-logout" @click="handleLogout"></v-btn>
