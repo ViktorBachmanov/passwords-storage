@@ -41,11 +41,11 @@ function openPasswordCreatingDialog() {
           <v-btn icon="mdi-folder-plus" @click="openGroupCreatingDialog"></v-btn>
           <v-btn icon="mdi-file-settings" @click="openPasswordCreatingDialog"></v-btn>
         </th>
-        <th>
-          <div style="display: flex; align-items: center;">
+        <th style="text-align: center;">
+          <div>
             Access for
             <v-select label="User" :items="treeStore.accessForUserIdNameArr" item-title="label" item-value="value"
-              v-model="treeStore.accessForUserId"></v-select>
+              v-model="treeStore.accessForUserId" variant="outlined"></v-select>
           </div>
         </th>
       </tr>
