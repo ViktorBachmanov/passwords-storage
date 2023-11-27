@@ -55,6 +55,22 @@ async function handleSubmit(data, node) {
     )
   }
 }
+
+// function handleSelect(e) {
+
+// }
+const selectedGroupId = computed({
+  get() {
+    return treeStore.selectedItem.type == 'group'
+      ? treeStore.selectedItem.id
+      : ''
+  },
+  set(val) {
+    if (treeStore.selectedItem.type == 'group') {
+      treeStore.setSelectedItem('group', val)
+    }
+  }
+})
 </script>
 
 
@@ -64,8 +80,8 @@ async function handleSubmit(data, node) {
       <h3>Password</h3>
       <v-sheet width="300" class="mx-auto">
         <FormKit type="form" submit-label="Save" @submit="handleSubmit" style="margin: 1em">
-          <FormKit type="select" label="Group" name="group_id" :options="treeStore.groupValueLabelArr"
-            :input-class="{ dark: isDark }" />
+          <FormKit type="select" label="Group" v-model="selectedGroupId" name="group_id"
+            :options="treeStore.groupValueLabelArr" :input-class="{ dark: isDark }" />
           <FormKit name="name" label="Name" validation="required" :input-class="{ dark: isDark }" />
           <FormKit name="value" label="Value" v-model="value" validation="required" :input-class="{ dark: isDark }" />
           <FormKit type="button" label="Generate" @click="handleGenerate" />

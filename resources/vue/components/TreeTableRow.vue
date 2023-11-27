@@ -1,12 +1,12 @@
 <script setup>
-import { ref, defineAsyncComponent } from 'vue'
+import { ref, defineAsyncComponent, computed } from 'vue'
 import { useTreeStore } from '../stores/tree-store.js'
 
 import AccessToggleDialog from './AccessToggleDialog.vue'
 // const AccessToggleDialog = defineAsyncComponent(() => import('./AccessToggleDialog.vue'))
 import PasswordShowDialog from './PasswordShowDialog.vue'
 
-defineProps({
+const props = defineProps({
   label: String,
   id: Number,
   type: String,   // password | group
@@ -32,12 +32,20 @@ function openPasswordShowDialog() {
   passwordShowDialog.value.handleOpen()
 }
 
+function handleSelectItem() {
+  treeStore.setSelectedItem(props.type, props.id)
+}
+
+const isSelected = computed(() => {
+  return props.type === treeStore.selectedItem.type && props.id === treeStore.selectedItem.id
+})
+
 </script>
 
 
 <template>
   <tr>
-    <td>
+    <td @click="handleSelectItem" :class="{ selected: isSelected }">
       <span :class="{ indent: indent }">
         <v-btn icon="mdi-eye" v-if="type == 'password'" @click="openPasswordShowDialog"></v-btn>
         {{ label }}
@@ -60,5 +68,9 @@ function openPasswordShowDialog() {
 <style scoped>
 .indent {
   margin-left: 1em;
+}
+
+.selected {
+  box-shadow: inset 0 0 4px magenta;
 }
 </style>

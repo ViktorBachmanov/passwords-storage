@@ -9,6 +9,7 @@ export const useTreeStore = defineStore('tree-store', () => {
   const groupValueLabelArr = ref([])  // for FormKit Select
   const accessForUserIdNameArr = ref([])  // for FormKit Select
   const accessForUserId = ref('')
+  const selectedItem = ref({})
 
   // function setAccessForUserId(selectedUserId) {
   //   fetchTree(selectedUserId)
@@ -45,6 +46,9 @@ export const useTreeStore = defineStore('tree-store', () => {
     return accessForUserIdNameArr.value.find(user => user.value === accessForUserId.value)?.label
   })
 
+  function setSelectedItem(type, id) {
+    selectedItem.value = { type, id }
+  }
 
   return { 
     groups, 
@@ -53,6 +57,8 @@ export const useTreeStore = defineStore('tree-store', () => {
     accessForUserIdNameArr,
     accessForUserId,
     accessableUserName,
+    selectedItem,
+    setSelectedItem,
     fetchTree 
   }
 })
