@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import axios from 'axios'
 
 
@@ -45,6 +45,10 @@ export const useTreeStore = defineStore('tree-store', () => {
     }    
   }
 
+  const accessableUserName = computed(() => {
+    return accessForUserIdNameArr.value.find(user => user.value === accessForUserId.value)?.label
+  })
+
 
   return { 
     groups, 
@@ -52,6 +56,7 @@ export const useTreeStore = defineStore('tree-store', () => {
     groupValueLabelArr,
     accessForUserIdNameArr,
     accessForUserId,
+    accessableUserName,
     fetchTree 
   }
 })

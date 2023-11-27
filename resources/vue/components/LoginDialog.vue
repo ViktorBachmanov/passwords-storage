@@ -9,16 +9,16 @@ const users = ref(response.data);
 const theme = useTheme()
 const isDark = computed(() => theme.global.current.value.dark)
 
-// const isOpen = ref(true)
+const isOpen = ref(true)
 
-// function handleClose() {
-//   isOpen.value = false
-// }
+function handleClose() {
+  isOpen.value = false
+}
 
 async function handleLogin(credentials, node) {
   try {
     const res = await axios.post('/login', credentials)
-    // handleClose();
+    handleClose();
     window.location.replace('/pw-storage')
   } catch (error) {
     node.setErrors(
@@ -31,7 +31,7 @@ async function handleLogin(credentials, node) {
 
 <template>
   <!-- <v-dialog v-model="isOpen" width="auto"> -->
-  <v-card width="300" class="mx-auto">
+  <v-card width="300" class="mx-auto" v-if="isOpen">
     <h3>Log In</h3>
     <v-sheet width="300" class="mx-auto">
       <FormKit type="form" submit-label="Login" @submit="handleLogin" style="margin: 1em">

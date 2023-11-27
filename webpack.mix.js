@@ -16,7 +16,13 @@ const mix = require('laravel-mix');
 //         //
 //     ]);
 
-mix.js('resources/vue/login-app-vue.js', 'public/js')
+mix
+// .webpackConfig({
+//   output: {
+//       chunkFilename: "js/[name].[chunkhash].js",
+//     },
+//   })
+  .js('resources/vue/login-app-vue.js', 'public/js')
     .js('resources/vue/passwords-storage-app-vue', 'public/js')
     .extract(["vue", "pinia", "vuetify", "formkit"])
    .vue()

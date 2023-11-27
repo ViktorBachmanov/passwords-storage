@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TreeController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 
 
@@ -47,5 +48,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/passwords', [PasswordController::class, 'store']);
     Route::post('/groups', [GroupController::class, 'store']);
     Route::get('/tree', [TreeController::class, 'index']);  
+    Route::patch('/toggle-access', [UserController::class, 'toggleAccess']);
   });
 });
