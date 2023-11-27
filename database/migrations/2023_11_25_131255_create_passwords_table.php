@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 64);
             $table->string('value');
+            $table->string('hash');
             $table->foreignId("creator_id")
                     ->nullable()
                     ->constrained(table: 'users')

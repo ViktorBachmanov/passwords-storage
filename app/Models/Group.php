@@ -25,10 +25,15 @@ class Group extends Model
     protected static function booted(): void
     {
         static::created(function (Group $group) {
+          $user = Auth::user();
+          if (!$user) {
+            return;
+          }
+
           AccessUser::create([
             'accessable_type' => 'App\Models\Group',
             'accessable_id' => $group->id,
-            'user_id' => Auth::user()->id,
+            'user_id' => $user->id,
             'access' => 1
           ]);
         });

@@ -4,6 +4,7 @@ import { useTreeStore } from '../stores/tree-store.js'
 
 import AccessToggleDialog from './AccessToggleDialog.vue'
 // const AccessToggleDialog = defineAsyncComponent(() => import('./AccessToggleDialog.vue'))
+import PasswordShowDialog from './PasswordShowDialog.vue'
 
 defineProps({
   label: String,
@@ -26,6 +27,11 @@ function openAccessToggleDialog() {
   accessToggleDialog.value.handleOpen()
 }
 
+const passwordShowDialog = ref(null)
+function openPasswordShowDialog() {
+  passwordShowDialog.value.handleOpen()
+}
+
 </script>
 
 
@@ -33,6 +39,7 @@ function openAccessToggleDialog() {
   <tr>
     <td>
       <span :class="{ indent: indent }">
+        <v-btn icon="mdi-eye" v-if="type == 'password'" @click="openPasswordShowDialog"></v-btn>
         {{ label }}
       </span>
     </td>
@@ -45,11 +52,13 @@ function openAccessToggleDialog() {
 
   <AccessToggleDialog ref="accessToggleDialog" :currentAccess="access.value" :itemId="id" :itemType="type"
     :itemName="label" />
+
+  <PasswordShowDialog ref="passwordShowDialog" :id="id" />
 </template>
 
 
 <style scoped>
 .indent {
-  margin-left: 2em;
+  margin-left: 1em;
 }
 </style>

@@ -45,6 +45,7 @@ Route::get('/login', function () {
 
 Route::middleware(['auth'])->group(function () {
   Route::prefix(PREFIX)->group(function () { 
+    Route::get('/passwords/{password}', [PasswordController::class, 'show']);
     Route::post('/passwords', [PasswordController::class, 'store']);
     Route::post('/groups', [GroupController::class, 'store']);
     Route::get('/tree', [TreeController::class, 'index']);  
