@@ -64,6 +64,15 @@ class User extends Authenticatable
         return $this->morphedByMany(Group::class, 'accessable')->withPivot('access');
     }
 
+    // private function getAccessiblePasswords()
+    // {
+    //   if ($this->is_admin) {
+    //     return Password::all();
+    //   }
+
+    //     return $this->passwords_accesses()->wherePivot('access', 1)->get();
+    // }
+
     public function getAccessibleGroups()
     {
       if ($this->is_admin) {
@@ -100,6 +109,15 @@ class User extends Authenticatable
     public function isCreatorOfPassword(int $passwordId): bool
     {
       return Password::find($passwordId)->creator_id === $this->id;
+    }
+
+    public function getGroupAccessiblePasswords(int $groupId)
+    {
+      if ($this->is_admin) {
+        return Password::where('group_id', $groupId)->get();
+      }
+
+        return $this->passwords_accesses()->where('group_id', $groupId)->wherePivot('access', 1)->get();
     }
 
 }

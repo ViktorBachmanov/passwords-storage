@@ -18,9 +18,4 @@ class Password extends Model
      */
     protected $fillable = ['name', 'value', 'creator_id', 'group_id'];
 
-
-    public static function getGroupAccessiblePasswords(int $groupId, User $user)
-    {
-      return DB::select('select * from passwords where group_id = ?', [$groupId]);
-    }
 }

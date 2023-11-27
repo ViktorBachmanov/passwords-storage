@@ -28,7 +28,7 @@ class GroupResource extends JsonResource
         return [
           'id' => $this->id,
           'name' => $this->name,
-          'passwords' => PasswordResource::collection(Password::getGroupAccessiblePasswords($this->id, Auth::user())),
+          'passwords' => PasswordResource::collection(Auth::user()->getGroupAccessiblePasswords($this->id)),
           'access' => [
              'value' => isset($groupAccess)
                 ? $groupAccess->pivot->access
