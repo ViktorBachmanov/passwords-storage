@@ -2,7 +2,10 @@
 import axios from 'axios'
 import { useTheme } from 'vuetify'
 
-import TreeTable from './components/TreeTable.vue'
+import { useAuth } from './composables/useAuth.js'
+
+
+// import TreeTable from './components/TreeTable.vue'
 
 
 defineProps({
@@ -16,11 +19,13 @@ function toggleTheme() {
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
 }
 
+const auth = useAuth();
 
 async function handleLogout() {
-  await axios.post('/logout')
+  // await axios.post('/logout')
+  auth.logout();
 
-  window.location.reload(true)
+  // window.location.reload(true)
 }
 </script>
 
@@ -39,7 +44,8 @@ async function handleLogout() {
     <v-main>
       <v-container fluid class="mt-10">
         <Suspense>
-          <TreeTable />
+          <!-- <TreeTable /> -->
+          <RouterView />
         </Suspense>
       </v-container>
     </v-main>
