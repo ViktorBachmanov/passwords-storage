@@ -1,23 +1,23 @@
 <script setup>
-import axios from 'axios'
-
-
-async function handleLogin(credentials, node) {
-  try {
-    const res = await axios.post('/login', credentials)
-
-    window.location.replace('/passwords-storage')
-  } catch (error) {
-    node.setErrors(
-      ['Error']
-    )
-  }
-}
+import LoginDialog from './components/LoginDialog.vue'
 </script>
 
 <template>
-  <FormKit type="form" submit-label="Login" @submit="handleLogin">
-    <FormKit name="email" label="Email address" validation="required|email" />
-    <FormKit type="password" name="password" label="Password" validation="required" />
-  </FormKit>
+  <v-layout>
+    <v-main>
+      <v-container fluid class="mt-10">
+        <Suspense>
+          <LoginDialog />
+        </Suspense>
+      </v-container>
+    </v-main>
+  </v-layout>
 </template>
+
+
+<style>
+.dark {
+  color: white;
+  background-color: rgb(41, 37, 37);
+}
+</style>
