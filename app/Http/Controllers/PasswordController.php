@@ -29,7 +29,7 @@ class PasswordController extends Controller
           'group_id' => $validated['group_id'],
         ]);
       } catch (\Exception $e) {
-        abort(500, 'File already exists');
+        abort(500, 'Password already exists');
       }
     }
 

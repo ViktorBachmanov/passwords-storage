@@ -25,7 +25,7 @@ class GroupController extends Controller
           'name' => $validated['name'],
         ]);
       } catch (\Exception $e) {
-        abort(500, 'Folder already exists');
+        abort(500, 'Group already exists');
       }
       
     }
