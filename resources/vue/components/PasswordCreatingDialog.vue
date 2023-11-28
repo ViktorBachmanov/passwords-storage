@@ -69,7 +69,7 @@ const selectedGroupId = computed({
   get() {
     return treeStore.selectedItem.type == 'group'
       ? treeStore.selectedItem.id
-      : ''
+      : 1
   },
   set(val) {
     if (treeStore.selectedItem.type == 'group') {

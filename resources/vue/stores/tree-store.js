@@ -9,7 +9,13 @@ export const useTreeStore = defineStore('tree-store', () => {
   const groupValueLabelArr = ref([])  // for FormKit Select
   const accessForUserIdNameArr = ref([])  // for FormKit Select
   const accessForUserId = ref('')
-  const selectedItem = ref({})
+
+  const rootGroupObj = {
+    type: 'group',
+    id: 1
+  }
+
+  const selectedItem = ref(rootGroupObj)
 
   
   async function fetchTree() {
@@ -47,7 +53,7 @@ export const useTreeStore = defineStore('tree-store', () => {
   }
 
   function reset() {
-    selectedItem.value = {}
+    selectedItem.value = rootGroupObj
     accessForUserId.value = ''
   }
 
