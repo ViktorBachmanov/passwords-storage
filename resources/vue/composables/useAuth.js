@@ -27,7 +27,7 @@ export function useAuth() {
 
     async function logout() {
         try {
-            await axios.post("/logout");
+            await axios.post("/api/logout");
             user.value = null;
             router.replace({ name: "login" });
         } catch (error) {

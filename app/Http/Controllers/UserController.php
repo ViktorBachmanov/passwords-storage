@@ -12,6 +12,14 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+  public function index()
+  {
+    return User::all()->map(fn ($user) => [
+      'label' => $user->email,
+      'value' => $user->email,
+    ]);
+  }
+  
     public function toggleAccess(Request $request)
     {
       $input = $request->all();

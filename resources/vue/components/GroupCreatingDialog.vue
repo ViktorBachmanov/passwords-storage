@@ -27,7 +27,7 @@ const treeStore = useTreeStore()
 
 async function handleSubmit(data, node) {
   try {
-    await axios.post('/pw-storage/groups', data)
+    await axios.post('/api/pw-storage/groups', data)
     handleClose()
     treeStore.fetchTree()
   } catch (error) {

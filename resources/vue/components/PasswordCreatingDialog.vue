@@ -45,7 +45,7 @@ function handleGenerate() {
 
 async function handleSubmit(data, node) {
   try {
-    await axios.post('/pw-storage/passwords', data)
+    await axios.post('/api/pw-storage/passwords', data)
     handleClose()
     treeStore.fetchTree()
   } catch (error) {

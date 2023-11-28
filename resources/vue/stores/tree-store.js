@@ -17,7 +17,7 @@ export const useTreeStore = defineStore('tree-store', () => {
 
   async function fetchTree(/*selectedUserId = ''*/) {
     try {
-      const response = await axios.get(`/pw-storage/tree?access_for_user_id=${accessForUserId.value}`)
+      const response = await axios.get(`/api/pw-storage/tree?access_for_user_id=${accessForUserId.value}`)
       // console.log('response.data: ', response.data)
       groups.value = response.data.groups
 

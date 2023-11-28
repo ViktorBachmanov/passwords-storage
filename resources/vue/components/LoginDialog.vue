@@ -5,7 +5,7 @@ import { useTheme } from 'vuetify'
 import { useRouter } from "vue-router";
 
 
-const response = await axios.get('/pw-storage/users');
+const response = await axios.get('/api/pw-storage/users');
 const users = ref(response.data);
 
 const theme = useTheme()
@@ -21,7 +21,7 @@ const router = useRouter()
 
 async function handleLogin(credentials, node) {
   try {
-    const res = await axios.post('/login', credentials)
+    const res = await axios.post('/api/login', credentials)
     // handleClose();
     // window.location.replace('/pw-storage')
     router.replace({ name: "home" });

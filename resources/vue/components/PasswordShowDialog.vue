@@ -27,7 +27,7 @@ const passwordVal = ref('')
 
 async function fetchPasswordValue() {
   try {
-    const response = await axios.get(`/pw-storage/passwords/${props.id}`)
+    const response = await axios.get(`/api/pw-storage/passwords/${props.id}`)
 
     passwordVal.value = response.data
 

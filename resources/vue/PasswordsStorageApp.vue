@@ -31,9 +31,9 @@ async function handleLogout() {
   <v-layout>
     <v-app-bar color="primary" density="compact">
       <v-app-bar-title>Current user: {{ auth.userName }}</v-app-bar-title>
+      <v-btn v-if="auth.isAuthenticated" icon="mdi-logout" @click="handleLogout"></v-btn>
       <template v-slot:append>
         <v-btn icon="mdi-brightness-4" @click="toggleTheme"></v-btn>
-        <v-btn v-if="auth.isAuthenticated" icon="mdi-logout" @click="handleLogout"></v-btn>
       </template>
     </v-app-bar>
 

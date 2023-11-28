@@ -2,11 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\GroupController;
-use App\Http\Controllers\TreeController;
-use App\Http\Controllers\UserController;
-use App\Models\User;
 
 
 /*
@@ -25,30 +20,7 @@ Route::get('/', function () {
 });
 
 
-const PREFIX = 'pw-storage';
 
-Route::get(PREFIX, function () {
+Route::get('pw-storage', function () {
   return view('passwords-storage');
-});
-
-Route::get(PREFIX . '/users', function () {
-  return User::all()->map(fn ($user) => [
-    'label' => $user->email,
-    'value' => $user->email,
-  ]);
-});
-
-Route::get('/login', function () {
-  return view('login');
-})->name('login');
-
-
-Route::middleware(['auth'])->group(function () {
-  Route::prefix(PREFIX)->group(function () { 
-    Route::get('/passwords/{password}', [PasswordController::class, 'show']);
-    Route::post('/passwords', [PasswordController::class, 'store']);
-    Route::post('/groups', [GroupController::class, 'store']);
-    Route::get('/tree', [TreeController::class, 'index']);  
-    Route::patch('/toggle-access', [UserController::class, 'toggleAccess']);
-  });
 });

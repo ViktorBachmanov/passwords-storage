@@ -37,7 +37,7 @@ const value = ref('')
 
 async function handleSubmit() {
   try {
-    await axios.patch(`/pw-storage/toggle-access`, {
+    await axios.patch(`/api/pw-storage/toggle-access`, {
       itemType: props.itemType,
       itemId: props.itemId,
       userId: treeStore.accessForUserId,
@@ -61,7 +61,7 @@ async function handleSubmit() {
       <h3>Access</h3>
       <v-sheet width="300" class="mx-auto">
         {{ currentAccess ? 'Запретить' : 'Разрешить' }} доступ к {{ itemType == 'password' ? 'паролю' : 'группе' }} {{
-          itemName }}
+                itemName }}
         пользователю {{ treeStore.accessableUserName }}
       </v-sheet>
 
