@@ -1,5 +1,7 @@
 <script setup>
 import { ref, defineAsyncComponent, computed } from 'vue'
+import axios from 'axios'
+
 import { useTreeStore } from '../stores/tree-store.js'
 
 import AccessToggleDialog from './AccessToggleDialog.vue'
@@ -20,12 +22,30 @@ const props = defineProps({
 
 const treeStore = useTreeStore()
 
-const accessToggleDialog = ref(null)
-function openAccessToggleDialog() {
+// const accessToggleDialog = ref(null)
+// function openAccessToggleDialog() {
+//   if (!treeStore.accessableUserName) {
+//     return
+//   }
+//   accessToggleDialog.value.handleOpen()
+// }
+
+async function toggleAccess() {
   if (!treeStore.accessableUserName) {
     return
   }
-  accessToggleDialog.value.handleOpen()
+
+  try {
+    await axios.patch(`/api/pw-storage/toggle-access`, {
+      itemType: props.type,
+      itemId: props.id,
+      userId: treeStore.accessForUserId,
+      currentAccess: props.access.value
+    })
+    treeStore.fetchTree()
+  } catch (error) {
+    console.log('toggle error: ', error)
+  }
 }
 
 const passwordShowDialog = ref(null)
@@ -57,14 +77,15 @@ const showChildren = ref(true)
       </span>
     </td>
     <td>
-      <input type="checkbox" v-if="access.display" :checked="access.value" @click.prevent="openAccessToggleDialog">
+      <!-- <input type="checkbox" v-if="access.display" :checked="access.value" @click.prevent="openAccessToggleDialog"> -->
+      <input type="checkbox" v-if="access.display" :checked="access.value" @click.prevent="toggleAccess">
     </td>
   </tr>
 
   <slot v-if="showChildren"></slot>
 
-  <AccessToggleDialog ref="accessToggleDialog" :currentAccess="access.value" :itemId="id" :itemType="type"
-    :itemName="label" />
+  <!-- <AccessToggleDialog ref="accessToggleDialog" :currentAccess="access.value" :itemId="id" :itemType="type"
+    :itemName="label" /> -->
 
   <PasswordShowDialog ref="passwordShowDialog" :id="id" />
 </template>
