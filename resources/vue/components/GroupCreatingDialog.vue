@@ -33,7 +33,9 @@ async function handleSubmit(data, node) {
   } catch (error) {
     node.setErrors(
       ['Error'],
-      error.response.data.errors
+      {
+        name: error.response.data.message
+      }
     )
   }
 }
@@ -45,8 +47,12 @@ async function handleSubmit(data, node) {
     <v-dialog v-model="isOpen" width="auto">
       <h3>Group</h3>
       <v-sheet width="300" class="mx-auto">
-        <FormKit type="form" submit-label="Create" @submit="handleSubmit" style="margin: 1em">
+        <FormKit type="form" :actions="false" #default="{ disabled }" @submit="handleSubmit" style="margin: 1em">
           <FormKit name="name" label="Name" validation="required" :input-class="{ dark: isDark }" />
+          <v-card-actions>
+            <FormKit type="submit" label="Create" :disabled="disabled" />
+            <FormKit type="button" label="Cancel" @click="handleClose" style="background: rgb(60, 104, 127)" />
+          </v-card-actions>
         </FormKit>
       </v-sheet>
     </v-dialog>

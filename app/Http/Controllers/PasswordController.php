@@ -20,13 +20,17 @@ class PasswordController extends Controller
     {
       $validated = $request->validated();
 
-      Password::create([
-        'name' => $validated['name'],
-        'value' => Crypt::encryptString($validated['value']),
-        'hash' => Hash::make($validated['value']),
-        'creator_id' => Auth::id(),
-        'group_id' => $validated['group_id'],
-      ]);
+      try {
+        Password::create([
+          'name' => $validated['name'],
+          'value' => Crypt::encryptString($validated['value']),
+          'hash' => Hash::make($validated['value']),
+          'creator_id' => Auth::id(),
+          'group_id' => $validated['group_id'],
+        ]);
+      } catch (\Exception $e) {
+        abort(500, 'File already exists');
+      }
     }
 
     /**

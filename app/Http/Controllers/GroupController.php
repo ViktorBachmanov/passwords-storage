@@ -20,9 +20,14 @@ class GroupController extends Controller
     {
       $validated = $request->validated();
 
-      Group::create([
-        'name' => $validated['name'],
-      ]);
+      try {
+        Group::create([
+          'name' => $validated['name'],
+        ]);
+      } catch (\Exception $e) {
+        abort(500, 'Folder already exists');
+      }
+      
     }
 
     /**
