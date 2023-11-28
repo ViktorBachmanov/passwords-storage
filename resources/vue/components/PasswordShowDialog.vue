@@ -41,12 +41,16 @@ async function fetchPasswordValue() {
 <template>
   <div class="text-center">
     <v-dialog v-model="isOpen" width="auto">
-      <h3>Password</h3>
-      <v-sheet width="300" class="mx-auto">
-        {{ passwordVal }}
-      </v-sheet>
+      <v-card title="Password">
+        <v-card-text>
+          {{ passwordVal }}
+        </v-card-text>
 
-      <v-btn text="Close" @click="handleClose"></v-btn>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text="Close" @click="handleClose"></v-btn>
+        </v-card-actions>
+      </v-card>
     </v-dialog>
   </div>
 </template>
