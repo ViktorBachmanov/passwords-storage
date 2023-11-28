@@ -30,12 +30,15 @@ const treeStore = useTreeStore()
 //   accessToggleDialog.value.handleOpen()
 // }
 
+const toggling = ref(false)
+
 async function toggleAccess() {
   if (!treeStore.accessableUserName) {
     return
   }
 
   try {
+    toggling.value = true
     await axios.patch(`/api/pw-storage/toggle-access`, {
       itemType: props.type,
       itemId: props.id,
@@ -45,6 +48,8 @@ async function toggleAccess() {
     treeStore.fetchTree()
   } catch (error) {
     console.log('toggle error: ', error)
+  } finally {
+    toggling.value = false
   }
 }
 
@@ -79,6 +84,7 @@ const showChildren = ref(true)
     <td>
       <!-- <input type="checkbox" v-if="access.display" :checked="access.value" @click.prevent="openAccessToggleDialog"> -->
       <input type="checkbox" v-if="access.display" :checked="access.value" @click.prevent="toggleAccess">
+      <span v-if="toggling" style="margin-left: 0.5em; color: gray">wait...</span>
     </td>
   </tr>
 
