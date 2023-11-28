@@ -76,15 +76,19 @@ const selectedGroupId = computed({
     <v-dialog v-model="isOpen" width="auto">
       <h3>Password</h3>
       <v-sheet width="300" class="mx-auto">
-        <FormKit type="form" submit-label="Save" @submit="handleSubmit" style="margin: 1em">
+        <FormKit type="form" :actions="false" #default="{ disabled }" @submit="handleSubmit" style="margin: 1em">
           <FormKit type="select" label="Group" v-model="selectedGroupId" name="group_id"
             :options="treeStore.groupValueLabelArr" :input-class="{ dark: isDark }" />
           <FormKit name="name" label="Name" validation="required" :input-class="{ dark: isDark }" />
           <FormKit name="value" label="Value" v-model="value" validation="required" :input-class="{ dark: isDark }" />
-          <FormKit type="button" label="Generate" @click="handleGenerate" />
-          <FormKit type="button" label="Cancel" @click="handleClose" />
+          <FormKit type="button" label="Generate" @click="handleGenerate" style="background: rgb(125, 67, 142)" />
+          <v-card-actions>
+            <FormKit type="submit" label="Create" :disabled="disabled" />
+            <FormKit type="button" label="Cancel" @click="handleClose" style="background: rgb(60, 104, 127)" />
+          </v-card-actions>
         </FormKit>
       </v-sheet>
     </v-dialog>
   </div>
 </template>
+
