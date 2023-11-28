@@ -1,10 +1,12 @@
 <script setup>
 import { ref, defineAsyncComponent, computed } from 'vue'
 import axios from 'axios'
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
 
 import { useTreeStore } from '../stores/tree-store.js'
 
-import AccessToggleDialog from './AccessToggleDialog.vue'
+// import AccessToggleDialog from './AccessToggleDialog.vue'
 // const AccessToggleDialog = defineAsyncComponent(() => import('./AccessToggleDialog.vue'))
 import PasswordShowDialog from './PasswordShowDialog.vue'
 import ArrowRight from './ArrowRight.vue'
@@ -32,8 +34,11 @@ const treeStore = useTreeStore()
 
 const toggling = ref(false)
 
+const $toast = useToast();
+
 async function toggleAccess() {
-  if (!treeStore.accessableUserName) {
+  if (!treeStore.accessForUserId) {
+    $toast.info("Select the user to manage access for");
     return
   }
 
