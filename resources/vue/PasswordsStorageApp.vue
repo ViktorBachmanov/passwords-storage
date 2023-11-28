@@ -1,11 +1,7 @@
 <script setup>
-import { computed } from 'vue'
 import { useTheme } from 'vuetify'
 
 import { useAuth } from './composables/useAuth.js'
-
-
-// import TreeTable from './components/TreeTable.vue'
 
 
 const theme = useTheme()
@@ -17,10 +13,7 @@ function toggleTheme() {
 const auth = useAuth();
 
 async function handleLogout() {
-  // await axios.post('/logout')
   auth.logout();
-
-  // window.location.reload(true)
 }
 
 </script>
@@ -31,7 +24,7 @@ async function handleLogout() {
   <v-layout>
     <v-app-bar color="primary" density="compact">
       <v-app-bar-title>Current user: {{ auth.userName }}</v-app-bar-title>
-      <v-btn v-if="auth.isAuthenticated" icon="mdi-logout" @click="handleLogout"></v-btn>
+      <v-btn v-if="auth.isAuthenticated.value" icon="mdi-logout" @click="handleLogout"></v-btn>
       <template v-slot:append>
         <v-btn icon="mdi-brightness-4" @click="toggleTheme"></v-btn>
       </template>
@@ -40,7 +33,6 @@ async function handleLogout() {
     <v-main>
       <v-container fluid class="mt-10">
         <Suspense>
-          <!-- <TreeTable /> -->
           <RouterView />
         </Suspense>
       </v-container>

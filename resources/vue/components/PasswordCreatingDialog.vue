@@ -56,9 +56,6 @@ async function handleSubmit(data, node) {
   }
 }
 
-// function handleSelect(e) {
-
-// }
 const selectedGroupId = computed({
   get() {
     return treeStore.selectedItem.type == 'group'

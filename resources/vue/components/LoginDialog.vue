@@ -22,8 +22,6 @@ const router = useRouter()
 async function handleLogin(credentials, node) {
   try {
     const res = await axios.post('/api/login', credentials)
-    // handleClose();
-    // window.location.replace('/pw-storage')
     router.replace({ name: "home" });
   } catch (error) {
     node.setErrors(
@@ -35,7 +33,6 @@ async function handleLogin(credentials, node) {
 
 
 <template>
-  <!-- <v-dialog v-model="isOpen" width="auto"> -->
   <v-card width="300" class="mx-auto" v-if="isOpen">
     <h3>Log In</h3>
     <v-sheet width="300" class="mx-auto">
@@ -45,7 +42,6 @@ async function handleLogin(credentials, node) {
         <FormKit type="text" name="password" label="Password" value="123" disabled :input-class="{ dark: isDark }" />
       </FormKit>
     </v-sheet>
-    <!-- </v-dialog> -->
   </v-card>
 </template>
 

@@ -1,15 +1,8 @@
 <script setup>
-// import { ref } from 'vue'
 
 defineProps({
   down: Boolean
 })
-
-// const down = ref(false)
-
-// function handleToggle() {
-//   down.value = !down.value
-// }
 </script>
 
 
