@@ -2,6 +2,7 @@
 import { useTheme } from 'vuetify'
 
 import { useAuth } from './composables/useAuth.js'
+import { useTreeStore } from './stores/tree-store.js'
 
 
 const theme = useTheme()
@@ -10,10 +11,13 @@ function toggleTheme() {
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
 }
 
-const auth = useAuth();
+const auth = useAuth()
+
+const treeStore = useTreeStore()
 
 async function handleLogout() {
-  auth.logout();
+  auth.logout()
+  treeStore.reset()
 }
 
 </script>

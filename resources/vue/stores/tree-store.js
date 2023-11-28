@@ -11,14 +11,10 @@ export const useTreeStore = defineStore('tree-store', () => {
   const accessForUserId = ref('')
   const selectedItem = ref({})
 
-  // function setAccessForUserId(selectedUserId) {
-  //   fetchTree(selectedUserId)
-  // }
-
-  async function fetchTree(/*selectedUserId = ''*/) {
+  
+  async function fetchTree() {
     try {
       const response = await axios.get(`/api/pw-storage/tree?access_for_user_id=${accessForUserId.value}`)
-      // console.log('response.data: ', response.data)
       groups.value = response.data.groups
 
       groupValueLabelArr.value = groups.value.map(group => {
@@ -50,6 +46,11 @@ export const useTreeStore = defineStore('tree-store', () => {
     selectedItem.value = { type, id }
   }
 
+  function reset() {
+    selectedItem.value = {}
+    accessForUserId.value = ''
+  }
+
   return { 
     groups, 
     rootGroup,
@@ -59,6 +60,7 @@ export const useTreeStore = defineStore('tree-store', () => {
     accessableUserName,
     selectedItem,
     setSelectedItem,
-    fetchTree 
+    fetchTree,
+    reset,
   }
 })
