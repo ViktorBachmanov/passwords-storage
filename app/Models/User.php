@@ -67,10 +67,10 @@ class User extends Authenticatable
     public function getAccessibleGroups()
     {
       if ($this->is_admin) {
-        return Group::all();
+        return Group::orderBy('name')->get();
       }
 
-        $groups = $this->groups_accesses()->wherePivot('access', 1)->get();
+        $groups = $this->groups_accesses()->wherePivot('access', 1)->orderBy('name')->get();
         $groups->push(Group::find(1));    // add the root_group
 
         return $groups;
@@ -105,10 +105,13 @@ class User extends Authenticatable
     public function getGroupAccessiblePasswords(int $groupId)
     {
       if ($this->is_admin) {
-        return Password::where('group_id', $groupId)->get();
+        return Password::where('group_id', $groupId)->orderBy('name')->get();
       }
 
-        return $this->passwords_accesses()->where('group_id', $groupId)->wherePivot('access', 1)->get();
+        return $this->passwords_accesses()
+                ->where('group_id', $groupId)
+                ->wherePivot('access', 1)
+                ->orderBy('name')->get();
     }
 
 }
