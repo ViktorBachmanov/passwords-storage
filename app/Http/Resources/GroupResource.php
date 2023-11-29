@@ -21,8 +21,9 @@ class GroupResource extends JsonResource
     {
         // return parent::toArray($request);
 
-        if ($userId = $request->input('user_id_access_for')) {
-          $groupAccess = User::find($userId)->groups_accesses()->firstWhere('accessable_id', $this->id);
+        $userId = $request->input('user_id_access_for');
+        if ($userId) {
+          $accessForUser = $this->getAccessForUser($userId);
         }
 
         return [
@@ -31,9 +32,7 @@ class GroupResource extends JsonResource
           'passwords' => PasswordResource::collection($this->passwords),
           'accessSelf' => $this->getAccessForUser(Auth::id()),
           'access' => [
-             'value' => isset($groupAccess)
-                ? $groupAccess->pivot->access
-                : null,
+             'value' => $accessForUser ?? false,
               'display' => Auth::user()->is_admin
           ],
         ];

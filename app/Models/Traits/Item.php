@@ -15,16 +15,18 @@ trait Item
       return true;
     }
 
-    $accessRecord = $this->users_accesses()->firstWhere('user_id', $userId);
+    $accessRecord = $this->users_accesses()
+        ->where('user_id', $userId)
+        ->firstWhere('accessable_id', $this->id);
  
     if ($accessRecord) {
-      return (bool) $accessRecord->pivot->get('access');
+      return (bool) $accessRecord->pivot->access;
     } 
 
     return false;
   }
 
-  private function users_accesses(): MorphToMany
+  public function users_accesses(): MorphToMany
   {
       return $this->morphToMany(User::class, 'accessable')->withPivot('access');
   }

@@ -48,36 +48,7 @@ class User extends Authenticatable
     ];
 
 
-    /**
-     * Get all of the passwords for the user.
-     */
-    public function passwords_accesses(): MorphToMany
-    {
-        return $this->morphedByMany(Password::class, 'accessable')->withPivot('access');
-    }
-
-    /**
-     * Get all of the groupss for the user.
-     */
-    public function groups_accesses(): MorphToMany
-    {
-        return $this->morphedByMany(Group::class, 'accessable')->withPivot('access');
-    }
-
-    // public function getAccessibleGroups()
-    // {
-    //   if ($this->is_admin) {
-    //     return Group::orderBy('name')->get();
-    //   }
-
-    //     $groups = $this->groups_accesses()->wherePivot('access', 1)->orderBy('name')->get();
-    //     $groups->push(Group::find(1));    // add the root_group
-
-    //     return $groups;
-    // }
-
-
-    public function toggleAccess(string $itemType, int $itemId, int|null $currentAccess): void
+    public function toggleAccess(string $itemType, int $itemId, bool $currentAccess): void
     {
       switch ($itemType) {
         case 'password':
@@ -101,17 +72,5 @@ class User extends Authenticatable
     {
       return Password::find($passwordId)->creator_id === $this->id;
     }
-
-    // public function getGroupAccessiblePasswords(int $groupId)
-    // {
-    //   if ($this->is_admin) {
-    //     return Password::where('group_id', $groupId)->orderBy('name')->get();
-    //   }
-
-    //     return $this->passwords_accesses()
-    //             ->where('group_id', $groupId)
-    //             ->wherePivot('access', 1)
-    //             ->orderBy('name')->get();
-    // }
 
 }

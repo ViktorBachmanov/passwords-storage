@@ -25,7 +25,7 @@ class UserController extends Controller
       $input = $request->all();
       $user = User::find($input['userId']);
 
-      $user->toggleAccess($input['itemType'], $input['itemId'], $input['currentAccess']);
+      $user->toggleAccess($input['itemType'], $input['itemId'], $request->boolean('currentAccess'));
       
     }
 }
