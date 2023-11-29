@@ -16,6 +16,7 @@ const props = defineProps({
   id: Number,
   type: String,   // password | group
   access: Object,
+  accessSelf: Boolean,
   indent: {
     type: Boolean,
     default: false
@@ -71,7 +72,7 @@ const isSelected = computed(() => {
   return props.type === treeStore.selectedItem.type && props.id === treeStore.selectedItem.id
 })
 
-const showChildren = ref(true)
+const showChildren = ref(props.accessSelf)
 
 </script>
 
@@ -80,7 +81,8 @@ const showChildren = ref(true)
   <tr>
     <td @click="handleSelectItem" :class="{ selected: isSelected }">
       <span :class="{ indent: indent }" style="display: flex; align-items: center;">
-        <ArrowRight v-if="type == 'group'" :down="showChildren" @click="showChildren = !showChildren" />
+        <v-icon v-if="!accessSelf" icon="mdi-cancel" size="x-small" style="margin-right: 0.5em"></v-icon>
+        <ArrowRight v-else-if="type == 'group'" :down="showChildren" @click="showChildren = !showChildren" />
         <v-btn v-else-if="type == 'password'" icon="mdi-eye" @click="openPasswordShowDialog" size="x-small"
           style="margin-right: 0.5em"></v-btn>
         {{ label }}

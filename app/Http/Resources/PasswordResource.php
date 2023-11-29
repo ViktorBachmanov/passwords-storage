@@ -20,13 +20,14 @@ class PasswordResource extends JsonResource
     {
         // return parent::toArray($request);
 
-        if ($userId = $request->input('access_for_user_id')) {
+        if ($userId = $request->input('user_id_access_for')) {
           $passwordAccess = User::find($userId)->passwords_accesses()->firstWhere('accessable_id', $this->id);
         }
 
         return [
           'id' => $this->id,
           'name' => $this->name,
+          'accessSelf' => $this->getAccessForUser(Auth::id()),
           'access' => [
             'value' => isset($passwordAccess)
                ? $passwordAccess->pivot->access

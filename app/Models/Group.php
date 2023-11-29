@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\User;
 use App\Models\AccessUser;
+use App\Models\Password;
+use App\Models\Contracts\Item;
+use App\Models\Traits\Item as ItemTrait;
 
 
-class Group extends Model
+class Group extends Model implements Item
 {
-    use HasFactory;
+    use HasFactory, ItemTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +24,15 @@ class Group extends Model
      * @var array
      */
     protected $fillable = ['name'];
+
+
+    /**
+     * Get the passwords for the group.
+     */
+    public function passwords(): HasMany
+    {
+      return $this->hasMany(Password::class);
+    }
 
 
     protected static function booted(): void

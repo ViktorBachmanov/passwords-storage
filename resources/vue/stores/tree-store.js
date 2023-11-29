@@ -20,10 +20,10 @@ export const useTreeStore = defineStore('tree-store', () => {
   
   async function fetchTree() {
     try {
-      const response = await axios.get(`/api/pw-storage/tree?access_for_user_id=${accessForUserId.value}`)
+      const response = await axios.get(`/api/pw-storage/tree?user_id_access_for=${accessForUserId.value}`)
       groups.value = response.data.groups
 
-      groupValueLabelArr.value = groups.value.map(group => {
+      groupValueLabelArr.value = groups.value.filter(group => group.accessSelf === true).map(group => {
         return {
           value: group.id,
           label: group.name,

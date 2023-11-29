@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Contracts\Item;
+use App\Models\Traits\Item as ItemTrait;
 
 
-class Password extends Model
+class Password extends Model implements Item
 {
-    use HasFactory;
+    use HasFactory, ItemTrait;
 
     /**
      * The attributes that are mass assignable.
