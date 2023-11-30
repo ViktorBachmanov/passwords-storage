@@ -49,7 +49,7 @@ async function toggleAccess() {
       userId: treeStore.accessForUserId,
       currentAccess: props.access.value
     })
-    treeStore.fetchTree()
+    await treeStore.fetchTree()
   } catch (error) {
     console.log('toggle error: ', error)
   } finally {
