@@ -15,9 +15,9 @@ trait Item
       return true;
     }
 
-    $accessRecord = $this->users_accesses()
-        ->where('user_id', $userId)
-        ->firstWhere('accessable_id', $this->id);
+    $accessRecord = $this->users()->firstWhere('user_id', $userId);
+        // ->where('user_id', $userId)
+        // ->firstWhere('accessable_id', $this->id);
  
     if ($accessRecord) {
       return (bool) $accessRecord->pivot->access;
@@ -26,7 +26,20 @@ trait Item
     return false;
   }
 
-  public function users_accesses(): MorphToMany
+  public function toggleAccess(int $userId, bool $currentAccess): void
+  {
+    $newAccess = $currentAccess ? 0 : 1;
+
+    $affectedRows = $this->users()->updateExistingPivot($userId, [
+      'access' => $newAccess,
+    ]);
+
+    if ($affectedRows == 0) {
+      $this->users()->attach($userId, ['access' => $newAccess]);
+    }
+  }
+
+  private function users(): MorphToMany
   {
       return $this->morphToMany(User::class, 'accessable')->withPivot('access');
   }

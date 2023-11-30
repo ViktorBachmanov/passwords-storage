@@ -45,9 +45,7 @@ async function toggleAccess() {
 
   try {
     toggling.value = true
-    await axios.patch(`/api/pw-storage/toggle-access`, {
-      itemType: props.type,
-      itemId: props.id,
+    await axios.patch(`/api/pw-storage/${props.type}/${props.id}`, {
       userId: treeStore.accessForUserId,
       currentAccess: props.access.value
     })

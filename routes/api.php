@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TreeController;
@@ -33,7 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/passwords', [PasswordController::class, 'store']);
     Route::post('/groups', [GroupController::class, 'store']);
     Route::get('/tree', [TreeController::class, 'index']);  
-    Route::patch('/toggle-access', [UserController::class, 'toggleAccess']);
+    Route::patch('/{itemClassName}/{itemId}', [ItemController::class, 'update']);
   });
 });
 

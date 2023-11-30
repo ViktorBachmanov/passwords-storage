@@ -19,13 +19,4 @@ class UserController extends Controller
       'value' => $user->email,
     ]);
   }
-  
-    public function toggleAccess(Request $request)
-    {
-      $input = $request->all();
-      $user = User::find($input['userId']);
-
-      $user->toggleAccess($input['itemType'], $input['itemId'], $request->boolean('currentAccess'));
-      
-    }
 }

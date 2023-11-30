@@ -48,26 +48,6 @@ class User extends Authenticatable
     ];
 
 
-    public function toggleAccess(string $itemType, int $itemId, bool $currentAccess): void
-    {
-      switch ($itemType) {
-        case 'password':
-          $accessableType = 'App\Models\Password';
-          break;
-        case 'group':
-          $accessableType = 'App\Models\Group';
-          break;
-      }
-
-      $newAccess = $currentAccess ? 0 : 1;
-
-      DB::table('accessables')
-        ->updateOrInsert(
-            ['user_id' => $this->id, 'accessable_type' => $accessableType, 'accessable_id' => $itemId],
-            ['access' => $newAccess]
-        );
-    }
-
     public function isCreatorOfPassword(int $passwordId): bool
     {
       return Password::find($passwordId)->creator_id === $this->id;

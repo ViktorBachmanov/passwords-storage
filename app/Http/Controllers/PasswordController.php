@@ -41,11 +41,5 @@ class PasswordController extends Controller
         return Crypt::decryptString($password->value);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    
 }
