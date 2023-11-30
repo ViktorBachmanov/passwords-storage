@@ -29,7 +29,7 @@ class GroupResource extends JsonResource
         return [
           'id' => $this->id,
           'name' => $this->name,
-          'passwords' => PasswordResource::collection($this->passwords),
+          'passwords' => PasswordResource::collection($this->passwords->sortBy('name', SORT_NATURAL)),
           'accessSelf' => $this->getAccessForUser(Auth::id()),
           'access' => [
              'value' => $accessForUser ?? false,

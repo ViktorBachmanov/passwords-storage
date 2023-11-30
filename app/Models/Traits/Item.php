@@ -16,9 +16,7 @@ trait Item
     }
 
     $accessRecord = $this->users()->firstWhere('user_id', $userId);
-        // ->where('user_id', $userId)
-        // ->firstWhere('accessable_id', $this->id);
- 
+        
     if ($accessRecord) {
       return (bool) $accessRecord->pivot->access;
     } 
