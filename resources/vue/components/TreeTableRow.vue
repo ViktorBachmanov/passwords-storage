@@ -79,7 +79,7 @@ const showChildren = ref(props.accessSelf)
   <tr>
     <td @click="handleSelectItem" :class="{ selected: isSelected }">
       <span :class="{ indent: indent }" style="display: flex; align-items: center;">
-        <v-icon v-if="!accessSelf" icon="mdi-cancel" size="x-small" style="margin-right: 0.5em"></v-icon>
+        <v-icon v-if="!accessSelf" icon="mdi-cancel" size="x-small" style="width: 32px; margin-right: 0.25em"></v-icon>
         <ArrowRight v-else-if="type == 'group'" :down="showChildren" @click="showChildren = !showChildren" />
         <v-btn v-else-if="type == 'password'" icon="mdi-eye" @click="openPasswordShowDialog" size="x-small"
           style="margin-right: 0.5em"></v-btn>
@@ -104,7 +104,7 @@ const showChildren = ref(props.accessSelf)
 
 <style scoped>
 .indent {
-  margin-left: 1em;
+  margin-left: 2em;
 }
 
 .selected {

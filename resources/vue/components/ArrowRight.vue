@@ -21,7 +21,8 @@ defineProps({
 }
 
 svg {
-  margin-right: 1em;
+  margin-right: 0.33em;
   cursor: pointer;
+  width: 32px;
 }
 </style>
