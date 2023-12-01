@@ -1,5 +1,6 @@
 <script setup>
 import { useTheme } from 'vuetify'
+import { useLocalStorage } from '@vueuse/core'
 
 import { useAuth } from './composables/useAuth.js'
 import { useTreeStore } from './stores/tree-store.js'
@@ -7,9 +8,19 @@ import { useTreeStore } from './stores/tree-store.js'
 
 const theme = useTheme()
 
-function toggleTheme() {
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+const localTheme = useLocalStorage('pws-theme', 'dark')
+
+setGlobalTheme(localTheme.value)
+
+function setGlobalTheme(val) {
+  theme.global.name.value = val
 }
+
+function toggleTheme() {
+  localTheme.value = localTheme.value === 'light' ? 'dark' : 'light';
+  setGlobalTheme(localTheme.value)
+}
+
 
 const auth = useAuth()
 
