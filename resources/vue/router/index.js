@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 // import PasswordStorageApp from '../PasswordStorageApp'
-import LoginApp from '../LoginApp'
+import LoginDialog from '../components/LoginDialog'
 import TreeTable from '../components/TreeTable'
 
 const routes = [
@@ -13,7 +13,7 @@ const routes = [
   {
       path: "/login",
       name: "login",
-      component: LoginApp,
+      component: LoginDialog,
   },
 ]
 
