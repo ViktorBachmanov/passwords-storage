@@ -34,16 +34,16 @@ function openPasswordCreatingDialog() {
 
 
 <template>
-  <v-table>
+  <v-table class="mx-auto" style="max-width: 800px;">
     <thead>
       <tr>
         <th>
-          <v-btn icon="mdi-folder-plus" @click="openGroupCreatingDialog"></v-btn>
+          <v-btn icon="mdi-folder-plus" @click="openGroupCreatingDialog" class="mr-2"></v-btn>
           <v-btn icon="mdi-file-settings" @click="openPasswordCreatingDialog"></v-btn>
         </th>
         <th style="text-align: center;">
           <div>
-            Access for
+            <h3 style="margin: 0.5em 0;">Access for</h3>
             <v-select label="User" :items="treeStore.accessForUserIdNameArr" item-title="label" item-value="value"
               v-model="treeStore.accessForUserId" variant="outlined"></v-select>
           </div>

@@ -38,8 +38,10 @@ async function handleLogout() {
   <!-- <v-card class="mx-auto" max-width="448"> -->
   <v-layout>
     <v-app-bar color="primary" density="compact">
-      <v-app-bar-title>Current user: {{ auth.userName }}</v-app-bar-title>
-      <v-btn v-if="auth.isAuthenticated.value" icon="mdi-logout" @click="handleLogout"></v-btn>
+      <v-app-bar-title>
+        Current user: {{ auth.userName }}
+        <v-btn v-if="auth.isAuthenticated.value" icon="mdi-logout" @click="handleLogout" class="ml-5"></v-btn>
+      </v-app-bar-title>
       <template v-slot:append>
         <v-btn icon="mdi-brightness-4" @click="toggleTheme"></v-btn>
       </template>
