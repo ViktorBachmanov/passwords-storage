@@ -35,7 +35,6 @@ async function handleLogout() {
 
 
 <template>
-  <!-- <v-card class="mx-auto" max-width="448"> -->
   <v-layout>
     <v-app-bar color="primary" density="compact">
       <v-app-bar-title>
@@ -56,7 +55,6 @@ async function handleLogout() {
     </v-main>
 
   </v-layout>
-  <!-- </v-card> -->
 </template>
 
 

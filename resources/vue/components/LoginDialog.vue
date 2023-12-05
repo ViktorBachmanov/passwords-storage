@@ -13,10 +13,6 @@ const isDark = computed(() => theme.global.current.value.dark)
 
 const isOpen = ref(true)
 
-// function handleClose() {
-//   isOpen.value = false
-// }
-
 const router = useRouter()
 
 async function handleLogin(credentials, node) {
@@ -37,7 +33,6 @@ async function handleLogin(credentials, node) {
     <h3 style="margin: 1em">Log In</h3>
     <v-sheet width="300" class="mx-auto">
       <FormKit type="form" submit-label="Login" @submit="handleLogin" style="margin: 1em">
-        <!-- <FormKit name="email" label="Email address" validation="required|email" /> -->
         <FormKit type="select" label="Email" name="email" :options="users" :input-class="{ dark: isDark }" />
         <FormKit type="text" name="password" label="Password" value="123" disabled :input-class="{ dark: isDark }" />
       </FormKit>

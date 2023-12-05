@@ -1,13 +1,11 @@
 <script setup>
-import { ref, defineAsyncComponent, computed } from 'vue'
+import { ref, computed } from 'vue'
 import axios from 'axios'
 import { useToast } from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
 
 import { useTreeStore } from '../stores/tree-store.js'
 
-// import AccessToggleDialog from './AccessToggleDialog.vue'
-// const AccessToggleDialog = defineAsyncComponent(() => import('./AccessToggleDialog.vue'))
 import PasswordShowDialog from './PasswordShowDialog.vue'
 import ArrowRight from './ArrowRight.vue'
 
@@ -24,14 +22,6 @@ const props = defineProps({
 })
 
 const treeStore = useTreeStore()
-
-// const accessToggleDialog = ref(null)
-// function openAccessToggleDialog() {
-//   if (!treeStore.accessableUserName) {
-//     return
-//   }
-//   accessToggleDialog.value.handleOpen()
-// }
 
 const toggling = ref(false)
 
@@ -87,16 +77,12 @@ const showChildren = ref(props.accessSelf)
       </span>
     </td>
     <td>
-      <!-- <input type="checkbox" v-if="access.display" :checked="access.value" @click.prevent="openAccessToggleDialog"> -->
       <input type="checkbox" v-if="access.display" :checked="access.value" @click.prevent="toggleAccess">
       <span v-if="toggling" style="margin-left: 0.5em; color: gray">wait...</span>
     </td>
   </tr>
 
   <slot v-if="showChildren"></slot>
-
-  <!-- <AccessToggleDialog ref="accessToggleDialog" :currentAccess="access.value" :itemId="id" :itemType="type"
-    :itemName="label" /> -->
 
   <PasswordShowDialog ref="passwordShowDialog" :id="id" />
 </template>

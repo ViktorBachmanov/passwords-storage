@@ -7,10 +7,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
-// use App\Models\Contracts\Item;
-// use App\Models\Group;
-// use App\Models\Password;
-
 
 class ItemController extends Controller
 {
