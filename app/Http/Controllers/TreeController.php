@@ -18,7 +18,7 @@ class TreeController extends Controller
       $user = Auth::user();
 
       return [
-        'groups' => GroupResource::collection(Group::all()->sortBy('name', SORT_NATURAL)),
+        'groups' => GroupResource::collection(Group::all()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)),
         'users' => User::where('is_admin', 0)->where('id', '!=', $user->id)->get(),
         'accessForUserId' => $request->input('access_for_user_id')
       ];
