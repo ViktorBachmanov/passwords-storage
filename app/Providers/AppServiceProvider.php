@@ -27,9 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         JsonResource::withoutWrapping();
 
-        Relation::enforceMorphMap([
-            Item::Group->value => 'App\Models\Group',
-            Item::Password->value => 'App\Models\Password',
-        ]);
+        Relation::enforceMorphMap(Item::getMorphMap());
     }
 }

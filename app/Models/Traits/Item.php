@@ -33,8 +33,13 @@ trait Item
     ]);
 
     if ($affectedRows == 0) {
-      $this->users()->attach($userId, ['access' => $newAccess]);
+      $this->createAccess($userId);
     }
+  }
+
+  public function createAccess(int $userId): void
+  {
+    $this->users()->attach($userId, ['access' => 1]);
   }
 
   private function users(): MorphToMany

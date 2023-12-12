@@ -14,23 +14,6 @@ use App\Models\Group;
 class GroupController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreGroupRequest $request)
-    {
-      $validated = $request->validated();
-
-      try {
-        Group::create([
-          'name' => $validated['name'],
-        ]);
-      } catch (\Exception $e) {
-        abort(500, 'Group already exists');
-      }
-      
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $id)

@@ -51,14 +51,14 @@ function openPasswordCreatingDialog() {
     </thead>
 
     <tbody>
-      <TreeTableRow v-for="group in treeStore.groups" :key="group.id" :label="group.name" :id="group.id" type="group"
+      <TreeTableRow v-for="group in treeStore.groups" :key="group.id" :label="group.name" :id="group.id" type="groups"
         :access="group.access" :accessSelf="group.accessSelf">
         <TreeTableRow v-for="password in group.passwords" :key="password.id" :label="password.name" :id="password.id"
-          type="password" :access="password.access" :accessSelf="password.accessSelf" :indent="true" />
+          type="passwords" :access="password.access" :accessSelf="password.accessSelf" :indent="true" />
       </TreeTableRow>
 
       <TreeTableRow v-for="password in treeStore.rootGroup.passwords" :key="password.id" :label="password.name"
-        :id="password.id" type="password" :access="password.access" :accessSelf="password.accessSelf" />
+        :id="password.id" type="passwords" :access="password.access" :accessSelf="password.accessSelf" />
     </tbody>
   </v-table>
 

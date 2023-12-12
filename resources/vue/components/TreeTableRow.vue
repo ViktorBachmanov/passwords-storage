@@ -12,7 +12,7 @@ import ArrowRight from './ArrowRight.vue'
 const props = defineProps({
   label: String,
   id: Number,
-  type: String,   // password | group
+  type: String,   // passwords | groups
   access: Object,
   accessSelf: Boolean,
   indent: {
@@ -71,7 +71,7 @@ const showChildren = ref(props.accessSelf)
       <span :class="{ indent: indent }" style="display: flex; align-items: center;">
         <v-icon v-if="!accessSelf" icon="mdi-cancel" size="x-small" style="width: 32px; margin-right: 0.25em"></v-icon>
         <ArrowRight v-else-if="type == 'group'" :down="showChildren" @click="showChildren = !showChildren" />
-        <v-btn v-else-if="type == 'password'" icon="mdi-eye" @click="openPasswordShowDialog" size="x-small"
+        <v-btn v-else-if="type == 'passwords'" icon="mdi-eye" @click="openPasswordShowDialog" size="x-small"
           style="margin-right: 0.5em"></v-btn>
         {{ label }}
       </span>

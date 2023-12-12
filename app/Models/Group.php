@@ -32,25 +32,25 @@ class Group extends Model implements Item
      */
     public function passwords(): HasMany
     {
-      return $this->hasMany(Password::class);
+        return $this->hasMany(Password::class);
     }
 
-
-    protected static function booted(): void
+    public static function getValidationRules(): array
     {
-        static::created(function (Group $group) {
-          $user = Auth::user();
-          if (!$user) {
-            return;
-          }
+        return [
+          'name' => 'required',
+        ];
+    }
 
-          AccessUser::create([
-            'accessable_type' => ItemEnum::Group->value,
-            'accessable_id' => $group->id,
-            'user_id' => $user->id,
-            'access' => 1
-          ]);
-        });
+    public static function createItem(array $validated): void
+    {
+        try {
+            self::create([
+              'name' => $validated['name'],
+            ]);
+        } catch (\Exception $e) {
+            abort(500, 'Group already exists');
+        }
     }
 
 }

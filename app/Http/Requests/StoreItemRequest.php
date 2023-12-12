@@ -4,8 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Enums\Item;
 
-class StoreGroupRequest extends FormRequest
+
+class StoreItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +24,8 @@ class StoreGroupRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required',
-        ];
+        $itemClassName = Item::getMorphMap()[$this->route('items')];
+
+        return $itemClassName::getValidationRules();
     }
 }

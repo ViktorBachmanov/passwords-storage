@@ -67,13 +67,13 @@ async function handleSubmit(data, node) {
 
 const selectedGroupId = computed({
   get() {
-    return treeStore.selectedItem.type == 'group'
+    return treeStore.selectedItem.type == 'groups'
       ? treeStore.selectedItem.id
       : 1
   },
   set(val) {
-    if (treeStore.selectedItem.type == 'group') {
-      treeStore.setSelectedItem('group', val)
+    if (treeStore.selectedItem.type == 'groups') {
+      treeStore.setSelectedItem('groups', val)
     }
   }
 })

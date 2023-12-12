@@ -7,21 +7,34 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
+use App\Enums\Item as ItemEnum;
+use App\Http\Requests\StoreItemRequest;
+
 
 class ItemController extends Controller
 {
     /**
+     * Store a newly created item in storage.
+     */
+    public function store(StoreItemRequest $request, string $items)
+    {
+      $validated = $request->validated();
+
+      $itemClassName = ItemEnum::getMorphMap()[$items];
+      $itemClassName::createItem($validated);
+
+      return response()->json([], 201);
+    }
+
+    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $itemClassName, string $itemId)
+    public function update(Request $request, string $items, string $itemId)
     {
       $input = $request->all();
 
-      $className = match ($itemClassName) {
-        'group' => 'App\Models\Group',
-        'password' => 'App\Models\Password',
-      };
+      $itemClassName = ItemEnum::getMorphMap()[$items];
 
-      $className::find($itemId)->toggleAccess($input['userId'], $input['currentAccess']);
+      $itemClassName::find($itemId)->toggleAccess($input['userId'], $input['currentAccess']);
     }
 }

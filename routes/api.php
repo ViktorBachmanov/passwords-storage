@@ -31,8 +31,7 @@ const PREFIX = 'pw-storage';
 Route::middleware(['auth:sanctum'])->group(function () {
   Route::prefix(PREFIX)->group(function () { 
     Route::get('/passwords/{password}', [PasswordController::class, 'show']);
-    Route::post('/passwords', [PasswordController::class, 'store']);
-    Route::post('/groups', [GroupController::class, 'store']);
+    Route::post('/{items}', [ItemController::class, 'store']);
     Route::get('/tree', [TreeController::class, 'index']);  
     Route::patch('/{itemClassName}/{itemId}', [ItemController::class, 'update']);
   });
