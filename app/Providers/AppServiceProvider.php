@@ -5,6 +5,11 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
+
+use App\Enums\Item;
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -21,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         JsonResource::withoutWrapping();
+
+        Relation::enforceMorphMap([
+            Item::Group->value => 'App\Models\Group',
+            Item::Password->value => 'App\Models\Password',
+        ]);
     }
 }

@@ -12,6 +12,7 @@ use App\Models\AccessUser;
 use App\Models\Password;
 use App\Models\Contracts\Item;
 use App\Models\Traits\Item as ItemTrait;
+use App\Enums\Item as ItemEnum;
 
 
 class Group extends Model implements Item
@@ -44,7 +45,7 @@ class Group extends Model implements Item
           }
 
           AccessUser::create([
-            'accessable_type' => 'App\Models\Group',
+            'accessable_type' => ItemEnum::Group->value,
             'accessable_id' => $group->id,
             'user_id' => $user->id,
             'access' => 1

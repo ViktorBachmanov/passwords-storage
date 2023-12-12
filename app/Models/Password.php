@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Contracts\Item;
 use App\Models\Traits\Item as ItemTrait;
+use App\Enums\Item as ItemEnum;
 
 
 class Password extends Model implements Item
@@ -25,7 +26,7 @@ class Password extends Model implements Item
     {
         static::created(function (Password $password) {
           AccessUser::create([
-            'accessable_type' => 'App\Models\Password',
+            'accessable_type' => ItemEnum::Password->value,
             'accessable_id' => $password->id,
             'user_id' => Auth::user()->id,
             'access' => 1
