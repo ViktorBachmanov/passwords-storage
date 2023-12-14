@@ -28,7 +28,7 @@ class ItemTest extends TestCase
     /**
      *  @test
      */
-    public function it_does_not_create_a_group_without_name(): void
+    public function creating_a_group_when_input_missing_a_name_is_rejected(): void
     {
         $user = User::factory()->create();
 
@@ -74,14 +74,21 @@ class ItemTest extends TestCase
     {
         $user = User::factory()->create();
 
+        $fakeName = fake()->name();
+
         $response = $this->actingAs($user)
-            ->postJson('/api/pw-storage/' . ItemEnum::Group->value, ['name' => fake()->name()]);
+            ->postJson('/api/pw-storage/' . ItemEnum::Group->value, ['name' => $fakeName]);
 
         // $response->dumpHeaders();
         // $response->dumpSession();
         // $response->dump();
 
         // dump($response);
+
+        $this->assertDatabaseHas('groups', [
+            'name' => $fakeName,
+            'id' => $response->getOriginalContent()['id']
+        ]);
 
         $response->assertStatus(201);
     }

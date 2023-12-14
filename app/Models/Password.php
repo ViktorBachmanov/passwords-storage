@@ -33,10 +33,10 @@ class Password extends Model implements Item
         ];
     }
 
-    public static function createItem(array $validated): void
+    public static function createItem(array $validated): Item
     {
         try {
-            Password::create([
+            return Password::create([
               'name' => $validated['name'],
               'value' => Crypt::encryptString($validated['value']),
               'hash' => Hash::make($validated['value']),

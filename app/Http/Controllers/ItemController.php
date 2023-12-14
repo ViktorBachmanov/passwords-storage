@@ -21,9 +21,9 @@ class ItemController extends Controller
       $validated = $request->validated();
 
       $itemClassName = ItemEnum::getMorphMap()[$items];
-      $itemClassName::createItem($validated);
+      $item = $itemClassName::createItem($validated);
 
-      return response()->json([], 201);
+      return response()->json(['id' => $item->id], 201);
     }
 
     /**

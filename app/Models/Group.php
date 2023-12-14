@@ -42,10 +42,10 @@ class Group extends Model implements Item
         ];
     }
 
-    public static function createItem(array $validated): void
+    public static function createItem(array $validated): Item
     {
         try {
-            self::create([
+            return self::create([
               'name' => $validated['name'],
             ]);
         } catch (\Exception $e) {

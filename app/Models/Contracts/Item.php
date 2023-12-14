@@ -11,5 +11,5 @@ interface Item
 
   public static function getValidationRules(): array;
 
-  public static function createItem(array $validated): void;
+  public static function createItem(array $validated): self;
 }
