@@ -36,9 +36,13 @@ const vuetify = createVuetify({
 
 const pinia = createPinia()
 
-createApp(PasswordsStorageApp)
+const mountEl = document.getElementById('passwords-storage-app-vue')
+
+createApp(PasswordsStorageApp, {
+  itemEnum: JSON.parse(mountEl.dataset.itemEnum)
+})
   .use(vuetify)
   .use(plugin, defaultConfig)
   .use(pinia)
   .use(router)
-  .mount("#passwords-storage-app-vue");
+  .mount(mountEl);

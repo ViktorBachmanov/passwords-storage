@@ -6,6 +6,11 @@ import { useAuth } from './composables/useAuth.js'
 import { useTreeStore } from './stores/tree-store.js'
 
 
+defineProps({
+  itemEnum: Object
+})
+
+
 const theme = useTheme()
 
 const localTheme = useLocalStorage('pws-theme', 'dark')
