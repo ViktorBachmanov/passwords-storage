@@ -49,7 +49,7 @@ async function handleSubmit(data, node) {
     handleClose()
     treeStore.fetchTree()
   } catch (error) {
-    if (error.response.status === 500) {
+    if (error.response.status === 409) {
       node.setErrors(
         ['Error'],
         {

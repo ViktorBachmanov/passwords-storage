@@ -25,8 +25,8 @@ class TreeTest extends TestCase
         $response = $this->actingAs($user)
             ->getJson('/api/pw-storage/tree');
 
-        $response->dumpHeaders();
-        $response->dump();
+        // $response->dumpHeaders();
+        // $response->dump();
 
         $response->assertStatus(200);
     }

@@ -49,7 +49,7 @@ class Group extends Model implements Item
               'name' => $validated['name'],
             ]);
         } catch (\Exception $e) {
-            abort(500, 'Group already exists');
+            abort(409, 'Group already exists');
         }
     }
 

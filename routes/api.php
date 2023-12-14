@@ -26,10 +26,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-const PREFIX = 'pw-storage';
+// const PREFIX = 'pw-storage';
 
 Route::middleware(['auth:sanctum'])->group(function () {
-  Route::prefix(PREFIX)->group(function () { 
+  Route::prefix('pw-storage')->group(function () { 
+    Route::get('/users', [UserController::class, 'index'])->withoutMiddleware('auth:sanctum');
     Route::get('/passwords/{password}', [PasswordController::class, 'show']);
     Route::post('/{items}', [ItemController::class, 'store']);
     Route::get('/tree', [TreeController::class, 'index']);  
@@ -37,4 +38,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
   });
 });
 
-Route::get(PREFIX . '/users', [UserController::class, 'index']);
+// Route::get(PREFIX . '/users', [UserController::class, 'index']);

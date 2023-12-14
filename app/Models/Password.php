@@ -44,7 +44,7 @@ class Password extends Model implements Item
               'group_id' => $validated['group_id'],
             ]);
          } catch (\Exception $e) {
-            abort(500, 'Password already exists');
+            abort(409, 'Password already exists');
         }
     }
 
