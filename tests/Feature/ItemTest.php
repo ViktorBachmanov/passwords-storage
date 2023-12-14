@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\GroupSeeder;
 
 use App\Models\User;
 use App\Enums\Item as ItemEnum;
@@ -14,14 +16,14 @@ use App\Enums\Item as ItemEnum;
 
 class ItemTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     /**
      * Run a specific seeder before each test.
      *
      * @var string
      */
-    protected $seeder = DatabaseSeeder::class;
+    // protected $seeder = DatabaseSeeder::class;
 
     /**
      *  @test
@@ -73,7 +75,7 @@ class ItemTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->postJson('/api/pw-storage/' . ItemEnum::Group->value, ['name' => 'Group-1']);
+            ->postJson('/api/pw-storage/' . ItemEnum::Group->value, ['name' => fake()->name()]);
 
         // $response->dumpHeaders();
         // $response->dumpSession();
@@ -82,5 +84,31 @@ class ItemTest extends TestCase
         // dump($response);
 
         $response->assertStatus(201);
+    }
+
+    /**
+     *  @test
+     */
+    public function it_toggles_access_to_group(): void
+    {
+        $admin = User::firstWhere('email', UserSeeder::ADMIN_1_EMAIL);
+        $user = User::firstWhere('email', UserSeeder::USER_1_EMAIL);
+
+        $response = $this->actingAs($admin)
+            ->patchJson(
+                '/api/pw-storage/' . ItemEnum::Group->value . '/' . GroupSeeder::GROUP_1_ID, 
+                [
+                    'userId' => $user->id,
+                    'currentAccess' => 0
+                ]
+            );
+
+        // $response->dumpHeaders();
+        // $response->dumpSession();
+        // $response->dump();
+
+        // dump($response);
+
+        $response->assertStatus(200);
     }
 }

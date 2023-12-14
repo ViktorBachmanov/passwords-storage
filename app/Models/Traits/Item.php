@@ -44,6 +44,8 @@ trait Item
 
   private function users(): MorphToMany
   {
-      return $this->morphToMany(User::class, 'accessable')->withPivot('access');
+      return $this->morphToMany(User::class, 'accessable')
+        ->withTimestamps()
+        ->withPivot('access');
   }
 }

@@ -8,8 +8,9 @@ use Illuminate\Database\Seeder;
 use App\Models\Group;
 
 
-class PwsGroupSeeder extends Seeder
+class GroupSeeder extends Seeder
 {
+    const GROUP_1_ID = 2;
     /**
      * Run the database seeds.
      */
@@ -18,6 +19,11 @@ class PwsGroupSeeder extends Seeder
         Group::firstOrCreate(
           ['id' => 1],
           ['name' => 'root_group']
+        );
+
+        Group::firstOrCreate(
+          ['id' => self::GROUP_1_ID],
+          ['name' => 'Test-group-1']
         );
     }
 }
